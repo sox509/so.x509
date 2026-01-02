@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homepage</title>
+<style>
+  body {
+    margin: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: "Courier New", monospace;
+    overflow-x: hidden;
+  }
+
+  /* Top menu for desktop */
+  nav {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0 20px 0;
+    position: sticky;
+    top: 0;
+    background-color: #000;
+    z-index: 10;
+  }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 150px;
+    font-size: 16px;
+    transition: color 0.2s;
+    font-family: "Courier New", monospace;
+  }
+
+  nav a:hover,
+  nav a:active {
+    color: #222;
+  }
+
+  /* Hamburger button for mobile */
+  #hamburger {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 20;
+    width: 30px;
+    height: 22px;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  #hamburger span {
+    display: block;
+    height: 4px;
+    background: #fff;
+    border-radius: 2px;
+  }
+
+  /* Curtain menu for mobile */
+  #mobileMenu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #111;
+    padding-top: 80px;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 15;
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+  }
+
+  #mobileMenu.show {
+    transform: translateX(0);
+  }
+
+  #mobileMenu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 25px;
+    font-size: 18px;
+    display: block;
+  }
+
+  #mobileMenu a:hover {
+    color: #222;
+  }
+
+  /* Responsive for mobile */
+  @media (max-width: 768px) {
+    nav {
+      display: none; /* Hide desktop menu */
+    }
+    #hamburger {
+      display: flex;
+    }
+    #mobileMenu {
+      display: flex;
+    }
+  }
+
+  /* Full-screen dark overlay */
+  #popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 999;
+    color: #fff;
+    font-family: "Courier New", monospace;
+  }
+
+  /* Main text fade-in */
+  #popupMainText {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  /* Close button */
+  #closePopup {
+    position: relative;
+    margin-bottom: 25px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #fff;
+  }
+  #closePopup:hover {
+    color: #444;
+  }
+
+  #afterPopupText {
+    opacity: 0;
+  }
+
+  /* Media container */
+  #contentContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  /* Background image */
+  #contentContainer img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0.8;
+  }
+
+  /* Videos styling */
+  #contentContainer video {
+    position: absolute;
+    object-fit: cover;
+    z-index: 2;
+  }
+
+  /* Video positions */
+  .vid1 { bottom: 60%; left: 10%; width: 190px; }
+  .vid2 { top: 7%; right: 10%; width: 300px; }
+  .vid3 { bottom: 10%; right: 5%; width: 250px; }
+  .vid4 { bottom: 50%; left: 40%; width: 300px; }
+
+</style>
+</head>
+<body>
+
+<!-- Desktop Top menu -->
+<nav id="topMenu">
+  <a href="home.html">h̸o̴m̷e̶</a>
+  <a href="sound.html">s̸ou̴nd̸</a>
+  <a href="writing.html">w̶ritin̷g̷s̴</a>
+  <a href="about.html">a̶b̴o̴u̴t̸</a>
+</nav>
+
+<!-- Hamburger button for mobile -->
+<div id="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<!-- Curtain menu for mobile -->
+<div id="mobileMenu">
+  <a href="home.html">h̸o̴m̷e̶</a>
+  <a href="sound.html">s̸ou̴nd̸</a>
+  <a href="writing.html">w̶ritin̷g̷s̴</a>
+  <a href="about.html">a̶b̴o̴u̴t̸</a>
+</div>
+
+<div class="thin-divider"></div>
+
+<!-- All images and videos inside contentContainer -->
+<div id="contentContainer">
+  <img src="public/images/collection.jpg" alt="photo10" />
+  <video src="public/video/pitch bored - Made with Clipchamp.mp4" class="vid1" autoplay loop muted></video>
+  <video src="public/video/doc_2025-12-09_20-37-21.mp4" class="vid2" autoplay loop muted></video>
+  <video src="public/video/water.mp4" class="vid3" autoplay loop muted></video>
+  <video src="public/video/video_2025-12-09_20-17-01 (online-video-cutter.com).mp4" class="vid4" autoplay loop muted></video>
+</div>
+
+<!-- Popup -->
+<div id="popupOverlay">
+  <div id="closePopup">✖</div>
+  <div id="popupMainText">
+    this is so.x509 digital mind..<br>
+    it's full of memories in here
+  </div>
+</div>
+
+<!-- Text that appears after closing popup -->
+<div id="afterPopupText" style="display: none; 
+  text-align: center; 
+  color: #fff; 
+  font-family: 'Courier New', monospace; 
+  font-size: 20px; 
+  margin-top: 100px;">
+ about: 
+kkkkkkkkkkkkkkkkkkkkkkkkkkk
+lllllllllllllllllllllll
+KKkchhsbjjojjjjjjjjjjjjj
+ssiscinn
+</div>
+
+<script>
+  // Hamburger toggle
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+  });
+
+  // Popup functionality
+  window.onload = () => {
+    // Show popup after 1.5 seconds
+    setTimeout(() => {
+      const overlay = document.getElementById("popupOverlay");
+      overlay.style.display = "flex";
+
+      setTimeout(() => {
+        document.getElementById("popupMainText").style.opacity = "1";
+      }, 100);
+
+    }, 1500);
+
+    // Close popup and show new text
+    document.getElementById("closePopup").onclick = () => {
+      document.getElementById("popupOverlay").style.display = "none";
+      document.getElementById("contentContainer").style.display = "none";
+
+      const newText = document.getElementById("afterPopupText");
+      newText.style.display = "block";
+
+      setTimeout(() => {
+        newText.style.opacity = "1";
+        newText.style.transition = "opacity 1s ease";
+      }, 50);
+    };
+  };
+</script>
+
+</body>
+</html>

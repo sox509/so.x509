@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zalgo Glitch</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #111;
+    font-family: "Courier New", monospace;
+    color: #fff;
+  }
+
+  .glitch-text {
+    font-size: 15px;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+    white-space: pre;
+    transition: color 0.2s; /* smooth hover effect */
+    color: #fff; /* default white */
+  }
+
+  .glitch-text:hover {
+    color: #0e0e0e; /* turns black on hover */
+  }
+
+  .plain-text {
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 10px; /* space between texts */
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 600px) {
+    .glitch-text {
+      font-size: 22px; /* larger for readability on phones */
+    }
+    .plain-text {
+      font-size: 18px;
+      margin-bottom: 15px;
+      padding: 0 10px; /* small padding to prevent overflow */
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="plain-text">
+  welcome to my digital mind // feel free to browse:
+</div>
+
+<div class="glitch-text" id="glitchText" onclick="window.location.href='home.html';">
+  so.x509
+</div>
+
+<script>
+  const textElement = document.getElementById('glitchText');
+  const baseText = 'so.x509';
+
+  // Zalgo marks
+  const zalgoUp = ['̍','̎','̄','̅','̿','̑','̆','̐','͒','͗','͑','̇','̈','̊','͂','̓','̈́','͊','͋','͌','̃','̂','̌','͐','́','̋','̏','̽','̉','ͣ','ͤ','ͥ','ͦ','ͧ','ͨ','ͩ','ͪ','ͫ','ͬ','ͭ','ͮ','ͯ','̾','͛','͆','̚'];
+  const zalgoDown = ['̖','̗','̘','̙','̜','̝','̞','̟','̠','̤','̥','̦','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͅ','͇','͈','͉','͍','͎','͓','͔','͕','͖','͙','͚','̣'];
+  const zalgoMid = ['̕','̛','̀','́','͘','̡','̢','̧','̨','̴','̵','̶','͜','͝','͞','͟','͠','͢','̸','̷','͡',' ҉'];
+
+  function randomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  function zalgo(text) {
+    let result = '';
+    for (let char of text) {
+      result += char;
+      for (let i = 0; i < randomInt(3); i++) result += zalgoUp[randomInt(zalgoUp.length)];
+      for (let i = 0; i < randomInt(3); i++) result += zalgoMid[randomInt(zalgoMid.length)];
+      for (let i = 0; i < randomInt(3); i++) result += zalgoDown[randomInt(zalgoDown.length)];
+    }
+    return result;
+  }
+
+  // Slower glitch: update every 400ms
+  setInterval(() => {
+    textElement.textContent = zalgo(baseText);
+  }, 400);
+</script>
+
+</body>
+</html>
