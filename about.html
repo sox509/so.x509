@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Homepage</title>
+
 <style>
   body {
     margin: 0;
@@ -14,7 +14,6 @@
     overflow-x: hidden;
   }
 
-  /* Top menu for desktop */
   nav {
     display: flex;
     justify-content: center;
@@ -29,9 +28,8 @@
     color: #fff;
     text-decoration: none;
     margin: 0 150px;
-    font-size: 16px;
+    font-size: 20px;
     transition: color 0.2s;
-    font-family: "Courier New", monospace;
   }
 
   nav a:hover,
@@ -39,7 +37,6 @@
     color: #222;
   }
 
-  /* Hamburger button for mobile */
   #hamburger {
     display: none;
     position: fixed;
@@ -60,7 +57,6 @@
     border-radius: 2px;
   }
 
-  /* Curtain menu for mobile */
   #mobileMenu {
     display: none;
     position: fixed;
@@ -71,10 +67,9 @@
     background-color: #111;
     padding-top: 80px;
     flex-direction: column;
-    align-items: flex-start;
     z-index: 15;
-    transition: transform 0.3s ease;
     transform: translateX(100%);
+    transition: transform 0.3s ease;
   }
 
   #mobileMenu.show {
@@ -86,121 +81,267 @@
     text-decoration: none;
     padding: 15px 25px;
     font-size: 18px;
-    display: block;
   }
 
-  #mobileMenu a:hover {
-    color: #222;
-  }
-
-  /* Responsive for mobile */
   @media (max-width: 768px) {
-    nav {
-      display: none; /* Hide desktop menu */
-    }
-    #hamburger {
-      display: flex;
-    }
-    #mobileMenu {
-      display: flex;
-    }
+    nav { display: none; }
+    #hamburger { display: flex; }
+    #mobileMenu { display: flex; }
+    .content-grid { grid-template-columns: 1fr !important; }
   }
 
-  /* Full-screen dark overlay */
   #popupOverlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.85);
+    inset: 0;
+    background: rgba(0,0,0,0.85);
     display: none;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     z-index: 999;
-    color: #fff;
-    font-family: "Courier New", monospace;
   }
 
-  /* Main text fade-in */
   #popupMainText {
     opacity: 0;
     transition: opacity 0.5s ease;
     text-align: center;
-    font-size: 16px;
   }
 
-  /* Close button */
   #closePopup {
-    position: relative;
     margin-bottom: 25px;
     cursor: pointer;
     font-size: 20px;
-    color: #fff;
-  }
-  #closePopup:hover {
-    color: #444;
   }
 
-  #afterPopupText {
-    opacity: 0;
-  }
-
-  /* Media container */
   #contentContainer {
     position: relative;
     width: 100vw;
     height: 100vh;
-    padding: 0;
     overflow: hidden;
   }
 
-  /* Background image */
   #contentContainer img {
     position: absolute;
-    top: 0;
-    right: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 1;
     opacity: 0.8;
+    z-index: 1;
   }
 
-  /* Videos styling */
   #contentContainer video {
     position: absolute;
     object-fit: cover;
     z-index: 2;
   }
 
-  /* Video positions */
   .vid1 { bottom: 60%; left: 10%; width: 190px; }
   .vid2 { top: 7%; right: 10%; width: 300px; }
   .vid3 { bottom: 10%; right: 5%; width: 250px; }
   .vid4 { bottom: 50%; left: 40%; width: 300px; }
 
+  h1 {
+    font-size: 45px;
+    font-weight: normal;
+    letter-spacing: 5px;
+    margin-left: -120px;
+    margin-bottom: 20px;
+  }
+
+  .top-images {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .top-images img {
+    width: 150px;
+    margin-right: 100px;
+    opacity: 0.8;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 150px;
+    gap: 40px;
+    line-height: 1.6;
+  }
+
+  .media-side {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-top: 100px;
+    position: relative;
+    z-index: 2;
+  }
+
+  #afterPopupText {
+    position: relative;
+    opacity: 0;
+    margin: 50px auto;
+    max-width: 900px;
+    padding: 20px;
+  }
+
+  /* ABOUT background image */
+  .about-wrapper {
+    position: relative;
+     top: -40px; /* negative value moves it UP */
+}
+  
+
+ .about-bg {
+  position: absolute;
+  top: -60px;
+  left: -200px;
+  width: 1650px;
+
+  /* visibility */
+  opacity: 0.55;
+
+  /* strong white enhancement */
+  filter:
+    brightness(1.8)
+    contrast(1.6)
+    saturate(0);
+
+  mix-blend-mode: screen;
+
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+
+  .about-wrapper h1,
+  .content-grid {
+    position: relative;
+    z-index: 1;
+  }
+
+  .content-grid > div:first-child {
+  margin-top: 40px; 
+  margin-left: -50px/* increase to move text further down */
+}
+
+
+.email-link {
+  color: #ffff00;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.email-link:hover,
+.email-link:active {
+  color: #ffffff; /* soft neon yellow */
+}
+
+
+
+/* ========================= */
+/* MOBILE SIMPLIFICATION     */
+/* ========================= */
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* FULLSCREEN INTRO MEDIA */
+  #contentContainer {
+    height: 100svh;
+  }
+
+
+
+  /* ABOUT SECTION */
+  .about-wrapper {
+    top: 0;
+    text-align: center;
+  }
+
+  .about-bg {
+    display: none; /* remove heavy background image */
+  }
+
+  h1 {
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin: 0 0 20px 0;
+  }
+
+  /* Top images */
+  .top-images {
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .top-images img {
+    width: 90px;
+    margin-right: 0;
+  }
+
+  /* Main content */
+  #afterPopupText {
+    padding: 10px;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px;
+  }
+
+  .content-grid > div:first-child {
+    margin: 0;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* Media column */
+  .media-side {
+    padding-top: 0;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .media-side img {
+    width: 90px;
+  }
+
+  /* Email */
+  .email-link {
+    font-size: 14px;
+  }
+}
+
+
+
+
+
+
+
 </style>
 </head>
+
 <body>
 
-<!-- Desktop Top menu -->
-<nav id="topMenu">
+<nav>
   <a href="home.html">h̸o̴m̷e̶</a>
   <a href="sound.html">s̸ou̴nd̸</a>
   <a href="writing.html">w̶ritin̷g̷s̴</a>
   <a href="about.html">a̶b̴o̴u̴t̸</a>
 </nav>
 
-<!-- Hamburger button for mobile -->
-<div id="hamburger">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+<div id="hamburger"><span></span><span></span><span></span></div>
 
-<!-- Curtain menu for mobile -->
 <div id="mobileMenu">
   <a href="home.html">h̸o̴m̷e̶</a>
   <a href="sound.html">s̸ou̴nd̸</a>
@@ -208,18 +349,14 @@
   <a href="about.html">a̶b̴o̴u̴t̸</a>
 </div>
 
-<div class="thin-divider"></div>
-
-<!-- All images and videos inside contentContainer -->
 <div id="contentContainer">
-  <img src="public/images/collection.jpg" alt="photo10" />
+  <img src="public/images/collection.jpg" alt="photo10" />  
   <video src="public/video/pitch bored - Made with Clipchamp.mp4" class="vid1" autoplay loop muted></video>
   <video src="public/video/doc_2025-12-09_20-37-21.mp4" class="vid2" autoplay loop muted></video>
   <video src="public/video/water.mp4" class="vid3" autoplay loop muted></video>
   <video src="public/video/video_2025-12-09_20-17-01 (online-video-cutter.com).mp4" class="vid4" autoplay loop muted></video>
 </div>
 
-<!-- Popup -->
 <div id="popupOverlay">
   <div id="closePopup">✖</div>
   <div id="popupMainText">
@@ -228,57 +365,75 @@
   </div>
 </div>
 
-<!-- Text that appears after closing popup -->
-<div id="afterPopupText" style="display: none; 
-  text-align: center; 
-  color: #fff; 
-  font-family: 'Courier New', monospace; 
-  font-size: 20px; 
-  margin-top: 100px;">
- about: 
-kkkkkkkkkkkkkkkkkkkkkkkkkkk
-lllllllllllllllllllllll
-KKkchhsbjjojjjjjjjjjjjjj
-ssiscinn
+<div id="afterPopupText" style="display:none;">
+
+  <div class="about-wrapper">
+    <img src="public\images\designn.png" class="about-bg" alt="">
+    <h1>ABOUT</h1>
+  </div>
+
+  <div class="top-images">
+    <img src="public/images/window.about.jpg">
+    <img src="public/images/window.about.jpg">
+    <img src="public/images/window.about.jpg">
+  </div>
+
+  <div class="content-grid">
+    <div>
+      <p>So.x509 is a collection of poems; experimental, dark, and ethereal melodies.</p>
+      <p>So.x509 is a producer, writer, and composer — a painter of worlds that exist between reality and virtual dreams.</p>
+      <p>So.x509 is cockroaches and the colour blue.</p>
+      <p>
+        So.x509 is a computer.<br>
+        Is a human.<br>
+        Is the brain.<br>
+        Is the software engineer of digital emotions.
+      </p>
+      <p>In a world that feels more computational on the outside than on the inside, she's trying.</p>
+
+
+<p style="margin-top: 30px; opacity: 0.85;">
+
+  <a href="mailto:so.x509@post.com" class="email-link">
+    so.x509@post.com
+  </a>
+</p>
+
+
+    </div>
+
+    <div class="media-side">
+      <img src="public/images/2.jpg">
+      <img src="public/images/3.jpg">
+      <img src="public/images/4.jpg">
+    </div>
+  </div>
+
+
+
 </div>
 
 <script>
-  // Hamburger toggle
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
 
-  hamburger.addEventListener('click', () => {
-    mobileMenu.classList.toggle('show');
-  });
+  hamburger.onclick = () => mobileMenu.classList.toggle('show');
 
-  // Popup functionality
   window.onload = () => {
-    // Show popup after 1.5 seconds
     setTimeout(() => {
-      const overlay = document.getElementById("popupOverlay");
-      overlay.style.display = "flex";
-
-      setTimeout(() => {
-        document.getElementById("popupMainText").style.opacity = "1";
-      }, 100);
-
+      popupOverlay.style.display = "flex";
+      setTimeout(() => popupMainText.style.opacity = 1, 100);
     }, 1500);
 
-    // Close popup and show new text
-    document.getElementById("closePopup").onclick = () => {
-      document.getElementById("popupOverlay").style.display = "none";
-      document.getElementById("contentContainer").style.display = "none";
-
-      const newText = document.getElementById("afterPopupText");
-      newText.style.display = "block";
-
-      setTimeout(() => {
-        newText.style.opacity = "1";
-        newText.style.transition = "opacity 1s ease";
-      }, 50);
+    closePopup.onclick = () => {
+      popupOverlay.style.display = "none";
+      contentContainer.style.display = "none";
+      afterPopupText.style.display = "block";
+      setTimeout(() => afterPopupText.style.opacity = 1, 50);
     };
   };
 </script>
 
 </body>
 </html>
+
