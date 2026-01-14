@@ -5,12 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Homepage</title>
 
+<!-- Load IBM Plex Mono from Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
+  /* ===== GLOBAL FONT ===== */
   body {
     margin: 0;
     background-color: #000;
     color: #fff;
-    font-family: "Courier New", monospace;
+    font-family: 'IBM Plex Mono', monospace; /* Default font for everything except ABOUT */
     overflow-x: hidden;
   }
 
@@ -30,6 +34,7 @@
     margin: 0 150px;
     font-size: 16px;
     transition: color 0.2s;
+    font-family: inherit; /* uses global IBM Plex Mono */
   }
 
   nav a:hover,
@@ -81,15 +86,10 @@
     text-decoration: none;
     padding: 15px 25px;
     font-size: 18px;
+    font-family: inherit;
   }
 
-  @media (max-width: 768px) {
-    nav { display: none; }
-    #hamburger { display: flex; }
-    #mobileMenu { display: flex; }
-    .content-grid { grid-template-columns: 1fr !important; }
-  }
-
+  /* POPUP */
   #popupOverlay {
     position: fixed;
     inset: 0;
@@ -105,14 +105,17 @@
     opacity: 0;
     transition: opacity 0.5s ease;
     text-align: center;
+    font-family: inherit;
   }
 
   #closePopup {
     margin-bottom: 25px;
     cursor: pointer;
     font-size: 20px;
+    font-family: inherit;
   }
 
+  /* CONTENT */
   #contentContainer {
     position: relative;
     width: 100vw;
@@ -187,170 +190,87 @@
     padding: 20px;
   }
 
-  /* ABOUT background image */
-  .about-wrapper {
-    position: relative;
-     top: -40px; /* negative value moves it UP */
-}
-  
-
- .about-bg {
-  position: absolute;
-  top: -60px;
-  left: -200px;
-  width: 1650px;
-
-  /* visibility */
-  opacity: 0.55;
-
-  /* strong white enhancement */
-  filter:
-    brightness(1.8)
-    contrast(1.6)
-    saturate(0);
-
-  mix-blend-mode: screen;
-
-  z-index: 0;
-  pointer-events: none;
-}
-
-
-
+  /* ===== ABOUT SECTION FONT OVERRIDE ===== */
+  .about-wrapper,
   .about-wrapper h1,
-  .content-grid {
-    position: relative;
-    z-index: 1;
+  .about-wrapper p {
+    font-family: 'Courier New', monospace; /* Keep Courier New only for ABOUT */
   }
 
-  .content-grid > div:first-child {
-  margin-top: 40px; 
-  margin-left: -50px/* increase to move text further down */
-}
-
-
-.email-link {
-  color: #ffff00;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.email-link:hover,
-.email-link:active {
-  color: #ffffff; /* soft neon yellow */
-}
-
-
-
-/* ========================= */
-/* MOBILE SIMPLIFICATION     */
-/* ========================= */
-@media (max-width: 768px) {
-
-  body {
-    overflow-x: hidden;
-  }
-
-  /* FULLSCREEN INTRO MEDIA */
-  #contentContainer {
-    height: 100svh;
-  }
-
-
-
-  /* ABOUT SECTION */
   .about-wrapper {
-    top: 0;
-    text-align: center;
+    position: relative;
+    top: -40px;
+    left: -30px;
+    color: #ffff00;
   }
 
   .about-bg {
-    display: none; /* remove heavy background image */
-  }
-
-  h1 {
-    font-size: 28px;
-    letter-spacing: 3px;
-    margin: 0 0 20px 0;
-  }
-
-  /* Top images */
-  .top-images {
-    justify-content: center;
-    margin-bottom: 30px;
-  }
-
-  .top-images img {
-    width: 90px;
-    margin-right: 0;
-  }
-
-  /* Main content */
-  #afterPopupText {
-    padding: 10px;
-  }
-
-  .content-grid {
-    grid-template-columns: 1fr !important;
-    gap: 30px;
+    position: absolute;
+    top: -75px;
+    left: -305px;
+    width: 1900px;
+    mix-blend-mode: screen;
+    z-index: 0;
+    pointer-events: none;
   }
 
   .content-grid > div:first-child {
-    margin: 0;
+    margin-top: 40px; 
+    margin-left: -50px;
   }
 
-  p {
-    font-size: 15px;
-    line-height: 1.7;
-  }
-
-  /* Media column */
-  .media-side {
-    padding-top: 0;
-    flex-direction: row;
-    justify-content: center;
-    gap: 15px;
-  }
-
-  .media-side img {
-    width: 90px;
-  }
-
-  /* Email */
   .email-link {
-    font-size: 14px;
+    color: #ffff00;
+    text-decoration: none;
+    transition: color 0.2s ease;
   }
-}
 
+  .email-link:hover,
+  .email-link:active {
+    color: #ffffff;
+  }
 
+  /* MOBILE */
+  @media (max-width: 768px) {
+    body { overflow-x: hidden; }
+    #contentContainer { height: 100svh; }
+    .about-wrapper { top: 0; text-align: center; }
+    .about-bg { display: none; }
+    h1 { font-size: 28px; letter-spacing: 3px; margin: 0 0 20px 0; font-family: 'B612', sans-serif; }
+    .top-images { justify-content: center; margin-bottom: 30px; }
+    .top-images img { width: 90px; margin-right: 0; }
+    #afterPopupText { padding: 10px; }
+    .content-grid { grid-template-columns: 1fr !important; gap: 30px; }
+    .content-grid > div:first-child { margin: 0; }
+    p { font-size: 15px; line-height: 1.7; font-family: inherit; }
+    .media-side { padding-top: 0; flex-direction: row; justify-content: center; gap: 15px; }
+    .media-side img { width: 90px; }
+    .email-link { font-size: 14px; }
+  }
 
-
-
-
+  @media (min-width: 769px) {
+    .content-grid > div:first-child { transform: translateX(50px); }
+    .media-side { transform: translateX(50px); }
+    .top-images { transform: translateX(50px); }
+  }
 
 </style>
 </head>
 
 <body>
 
-<nav>
-  <a href="home.html">h̸o̴m̷e̶</a>
-  <a href="sound.html">s̸ou̴nd̸</a>
-  <a href="writing.html">w̶ritin̷g̷s̴</a>
-  <a href="about.html">a̶b̴o̴u̴t̸</a>
+<nav id="topMenu">
+  <a href="home.html">home</a>
+  <a href="sound.html">sound</a>
+  <a href="writing.html">writings</a>
+  <a href="about.html">about</a>
 </nav>
-
 <div id="hamburger"><span></span><span></span><span></span></div>
 
-<div id="mobileMenu">
-  <a href="home.html">h̸o̴m̷e̶</a>
-  <a href="sound.html">s̸ou̴nd̸</a>
-  <a href="writing.html">w̶ritin̷g̷s̴</a>
-  <a href="about.html">a̶b̴o̴u̴t̸</a>
-</div>
+
 
 <div id="contentContainer">
-  <img src="public/images/collection.jpg" alt="photo10" />  
+  <img src="public\images\collection photos.jpg">
   <video src="public/video/pitch bored - Made with Clipchamp.mp4" class="vid1" autoplay loop muted></video>
   <video src="public/video/doc_2025-12-09_20-37-21.mp4" class="vid2" autoplay loop muted></video>
   <video src="public/video/water.mp4" class="vid3" autoplay loop muted></video>
@@ -366,10 +286,9 @@
 </div>
 
 <div id="afterPopupText" style="display:none;">
-
   <div class="about-wrapper">
-    <img src="public\images\designn.png" class="about-bg" alt="">
-    <h1>ABOUT</h1>
+    <img src="public\images\ABOUT(7).png" class="about-bg" alt="">
+    <h1>About</h1>
   </div>
 
   <div class="top-images">
@@ -391,15 +310,11 @@
       </p>
       <p>In a world that feels more computational on the outside than on the inside, she's trying.</p>
 
-
-<p style="margin-top: 30px; opacity: 0.85;">
-
-  <a href="mailto:so.x509@post.com" class="email-link">
-    so.x509@post.com
-  </a>
-</p>
-
-
+      <p style="margin-top: 30px; opacity: 0.85;">
+        <a href="mailto:so.x509@post.com" class="email-link">
+          so.x509@post.com
+        </a>
+      </p>
     </div>
 
     <div class="media-side">
@@ -408,9 +323,6 @@
       <img src="public/images/4.jpg">
     </div>
   </div>
-
-
-
 </div>
 
 <script>
@@ -436,5 +348,7 @@
 
 </body>
 </html>
+
+
 
 
