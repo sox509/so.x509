@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Homepage</title>
 
-<!-- Load IBM Plex Mono from Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -14,8 +13,9 @@
     margin: 0;
     background-color: #000;
     color: #fff;
-    font-family: 'IBM Plex Mono', monospace; /* Default font for everything except ABOUT */
+    font-family: 'IBM Plex Mono', monospace;
     overflow-x: hidden;
+    padding-bottom: 60px; /* Space for the status bar */
   }
 
   nav {
@@ -34,7 +34,7 @@
     margin: 0 150px;
     font-size: 16px;
     transition: color 0.2s;
-    font-family: inherit; /* uses global IBM Plex Mono */
+    font-family: inherit;
   }
 
   nav a:hover,
@@ -89,6 +89,35 @@
     font-family: inherit;
   }
 
+  /* SYSTEM STATUS BAR STYLES */
+  .system-status {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    border-top: 1px solid rgba(218, 255, 44, 0.2);
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 30px;
+    font-size: 10px;
+    color: #daff2c;
+    letter-spacing: 2px;
+    z-index: 1100;
+    box-sizing: border-box;
+    text-transform: uppercase;
+  }
+
+  .pulse {
+    animation: pulse-animation 2s infinite;
+    font-weight: bold;
+  }
+
+  @keyframes pulse-animation {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
   /* POPUP */
   #popupOverlay {
     position: fixed;
@@ -123,9 +152,11 @@
     overflow: hidden;
   }
 
-  #contentContainer img {
+  /* FULLSCREEN BACKGROUND VIDEO */
+  .bg-video {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -133,7 +164,7 @@
     z-index: 1;
   }
 
-  #contentContainer video {
+  #contentContainer video:not(.bg-video) {
     position: absolute;
     object-fit: cover;
     z-index: 2;
@@ -190,18 +221,18 @@
     padding: 20px;
   }
 
-  /* ===== ABOUT SECTION FONT OVERRIDE ===== */
+  /* ABOUT SECTION FONT OVERRIDE */
   .about-wrapper,
   .about-wrapper h1,
   .about-wrapper p {
-    font-family: 'Courier New', monospace; /* Keep Courier New only for ABOUT */
+    font-family: 'Courier New', monospace;
   }
 
   .about-wrapper {
     position: relative;
     top: -40px;
     left: -30px;
-    color: #ffff00;
+    color: #daff2c;
   }
 
   .about-bg {
@@ -219,41 +250,50 @@
     margin-left: -50px;
   }
 
-  .email-link {
-    color: #ffff00;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .email-link:hover,
-  .email-link:active {
-    color: #ffffff;
-  }
-
-  /* MOBILE */
-  @media (max-width: 768px) {
-    body { overflow-x: hidden; }
-    #contentContainer { height: 100svh; }
-    .about-wrapper { top: 0; text-align: center; }
-    .about-bg { display: none; }
-    h1 { font-size: 28px; letter-spacing: 3px; margin: 0 0 20px 0; font-family: 'B612', sans-serif; }
-    .top-images { justify-content: center; margin-bottom: 30px; }
-    .top-images img { width: 90px; margin-right: 0; }
-    #afterPopupText { padding: 10px; }
-    .content-grid { grid-template-columns: 1fr !important; gap: 30px; }
-    .content-grid > div:first-child { margin: 0; }
-    p { font-size: 15px; line-height: 1.7; font-family: inherit; }
-    .media-side { padding-top: 0; flex-direction: row; justify-content: center; gap: 15px; }
-    .media-side img { width: 90px; }
-    .email-link { font-size: 14px; }
-  }
-
   @media (min-width: 769px) {
     .content-grid > div:first-child { transform: translateX(50px); }
     .media-side { transform: translateX(50px); }
     .top-images { transform: translateX(50px); }
   }
 
+/* SOCIAL LINKS SECTION */
+.social-footer {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    border-top: 1px solid rgba(218, 255, 44, 0.3);
+    padding: 30px 0;
+    width: 100%;
+}
+
+.social-icon {
+    color: #daff2c;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 2px;
+    position: relative;
+    transition: all 0.1s;
+    text-transform: uppercase;
+}
+
+.social-icon:before {
+    content: "[ ";
+    opacity: 0.5;
+}
+
+.social-icon:after {
+    content: " ]";
+    opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+    .social-footer {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}
 </style>
 </head>
 
@@ -267,14 +307,9 @@
 </nav>
 <div id="hamburger"><span></span><span></span><span></span></div>
 
-
-
 <div id="contentContainer">
-  <img src="public\images\collection photos.jpg">
-  <video src="public/video/pitch bored - Made with Clipchamp.mp4" class="vid1" autoplay loop muted></video>
-  <video src="public/video/doc_2025-12-09_20-37-21.mp4" class="vid2" autoplay loop muted></video>
-  <video src="public/video/water.mp4" class="vid3" autoplay loop muted></video>
-  <video src="public/video/video_2025-12-09_20-17-01 (online-video-cutter.com).mp4" class="vid4" autoplay loop muted></video>
+  <video src="public\video\home sound blabl ndnoasocms.mp4" class="bg-video" autoplay loop muted playsinline></video>
+  
 </div>
 
 <div id="popupOverlay">
@@ -309,12 +344,6 @@
         Is the software engineer of digital emotions.
       </p>
       <p>In a world that feels more computational on the outside than on the inside, she's trying.</p>
-
-      <p style="margin-top: 30px; opacity: 0.85;">
-        <a href="mailto:so.x509@post.com" class="email-link">
-          so.x509@post.com
-        </a>
-      </p>
     </div>
 
     <div class="media-side">
@@ -323,6 +352,18 @@
       <img src="public/images/4.jpg">
     </div>
   </div>
+</div>
+
+<div class="system-status">
+  <div>LOG: <span id="clock">00:00:00</span></div>
+  <div>STREAM: <span id="data-stream">IDLE</span></div>
+  <div>STATUS: <span class="pulse">ACTIVE</span></div>
+</div>
+
+<div class="social-footer">
+    <a href="https://www.instagram.com/so.x509/" target="_blank" class="social-icon">Instagram</a>
+    <a href="https://open.spotify.com/artist/0" target="_blank" class="social-icon">Spotify</a>
+    <a href="mailto:so.x509@post.com" class="social-icon">Email</a>
 </div>
 
 <script>
@@ -344,11 +385,25 @@
       setTimeout(() => afterPopupText.style.opacity = 1, 50);
     };
   };
+
+  function updateClock() {
+    const now = new Date();
+    document.getElementById('clock').textContent = now.toLocaleTimeString();
+  }
+
+  const streams = ["MEM_RECOVERY", "DEPTH_SYNC", "BIO_METRIC", "NEURAL_DUMP", "DATA_LAKE", "IDLE"];
+  function updateStream() {
+    const text = streams[Math.floor(Math.random() * streams.length)];
+    document.getElementById('data-stream').textContent = text;
+  }
+
+  setInterval(updateClock, 1000);
+  setInterval(updateStream, 2500);
+  updateClock();
+  updateStream();
 </script>
 
 </body>
 </html>
-
-
 
 
