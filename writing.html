@@ -5,13 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Homepage</title>
 
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
   body {
     margin: 0;
     background-color: #000;
     color: #fff;
-    font-family: "Courier New", monospace;
+    font-family: 'IBM Plex Mono', monospace;
     overflow-x: hidden;
+    padding-bottom: 40px; /* Space for the status bar */
   }
 
   /* Top menu for desktop */
@@ -31,7 +34,6 @@
     margin: 0 150px;
     font-size: 16px;
     transition: color 0.2s;
-    font-family: "Courier New", monospace;
   }
 
   nav a:hover,
@@ -89,49 +91,22 @@
     display: block;
   }
 
-  #mobileMenu a:hover {
-    color: #222;
-  }
-
   /* Desktop paragraph */
   p {
     position: absolute;
     top:100px;
     left:30px;
     font-size:14px;
-    color:yellow;
-    font-family:'Courier New', monospace;
+    color:#daff2c;
     max-width:140px;
   }
 
-  /* Three photos default desktop positions */
-  img.clickable:nth-child(1) {
-    position:absolute; 
-    bottom:300px; 
-    left:100px; 
-    width:430px; 
-    height:auto;
-  }
+  /* Three photos */
+  img.clickable:nth-child(1) { position:absolute; bottom:300px; left:100px; width:430px; height:auto; }
+  img.clickable:nth-child(2) { position:absolute; bottom:50px; left:545px; width:430px; height:auto; }
+  img.clickable:nth-child(3) { position:absolute; top:300px; right:100px; width:430px; height:auto; }
 
-  img.clickable:nth-child(2) {
-    position:absolute; 
-    bottom:-30px; 
-    left:545px; 
-    width:430px; 
-    height:auto;
-  }
-
-  img.clickable:nth-child(3) {
-    position:absolute; 
-    top:300px; 
-    right:100px; 
-    width:430px; 
-    height:auto;
-  }
-
-  /* ========================= */
   /* LIGHTBOX STYLES */
-  /* ========================= */
   #lightbox {
     position: fixed;
     top: 0;
@@ -152,74 +127,62 @@
     box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
   }
 
-  /* ========================= */
-  /* RESPONSIVE / MOBILE STYLES */
-  /* ========================= */
+  /* SYSTEM STATUS BAR STYLES */
+  .system-status {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    border-top: 1px solid rgba(218, 255, 44, 0.2);
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 30px;
+    font-size: 10px;
+    color: #daff2c;
+    letter-spacing: 2px;
+    z-index: 1100;
+    box-sizing: border-box;
+    text-transform: uppercase;
+  }
+
+  .pulse {
+    animation: pulse-animation 2s infinite;
+    font-weight: bold;
+  }
+
+  @keyframes pulse-animation {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* Mobile Responsive */
   @media (max-width: 768px) {
-  /* Hide desktop nav and paragraph */
-  nav {
-    display: none;
+    #hamburger { display: flex; }
+    #mobileMenu { display: flex; }
+    nav { display: none; }
+    p { position: relative; top: 0; left: 0; padding: 20px; max-width: 100%; }
+    img.clickable { position: relative !important; left: 0 !important; right: 0 !important; top: 0 !important; bottom: 0 !important; width: 90%; margin: 20px auto; display: block; }
+    .system-status { font-size: 8px; padding: 8px 15px; }
   }
-
-  p {
-    display: none;
-  }
-
-  /* Show hamburger and mobile menu */
-  #hamburger {
-    display: flex;
-  }
-  #mobileMenu {
-    display: flex;
-  }
-
-  /* Images stack on mobile */
-  img.clickable:nth-child(1) {
-    position: absolute;
-    top: 50px;   /* first image */
-    left: 5%;
-    width: 90%;
-    height: auto;
-  }
-
-  img.clickable:nth-child(2) {
-    position: absolute;
-    top: 340px;  /* second image ("Gentle Push") */
-    left: 5%;
-    width: 90%;
-    height: auto;
-  }
-
-  img.clickable:nth-child(3) {
-    position: absolute;
-    top: 875px;  /* third image ("3h") moved further down for more space */
-    left: 5%;
-    width: 90%;
-    height: auto;
-  }
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- Desktop Top menu -->
 <nav id="topMenu">
-  <a href="home.html">h̸o̴m̷e̶</a>
-  <a href="sound.html">s̸ou̴nd̸</a>
-  <a href="writing.html">w̶ritin̷g̷s̴</a>
-  <a href="about.html">a̶b̴o̴u̴t̸</a>
+  <a href="home.html">home</a>
+  <a href="sound.html">sound</a>
+  <a href="writing.html">writings</a>
+  <a href="about.html">about</a>
 </nav>
 
-<!-- Hamburger button for mobile -->
 <div id="hamburger">
   <span></span>
   <span></span>
   <span></span>
 </div>
 
-<!-- Curtain menu for mobile -->
 <div id="mobileMenu">
   <a href="home.html">h̸o̴m̷e̶</a>
   <a href="sound.html">s̸ou̴nd̸</a>
@@ -227,40 +190,37 @@
   <a href="about.html">a̶b̴o̴u̴t̸</a>
 </div>
 
-<!-- Yellow paragraph (desktop only) -->
 <p>
 I want to write I want to write I want to write I want to write I want to write I want to write I want to write 
 I want to write I want to write I want to write I want to write I want to write I want to write I want to write 
 I want to write I want to write I want to write I want to write I want to write I want to write I want to write 
 I want to write I want to write I want to write I want to write I want to write I want to write I want to write 
-I want to write I want to write I want to write I want to write I want to write I want to write I want to write 
-I want to write I want to write I want to write I want to write I want to write I want to write I want to write 
-I want to write I want to write I want to write I want to write I want to write I want to write I want to write 
-I want to write I want to write I want to write I want to write 
+I want to write I want to write I want to write I want to write I want to write I want to write I want to write
+I want to write I want to write I want to write I want to write I want to write I want to write I want to write
+I want to write I want to write I want to write 
+
 </p>
 
-<!-- Three photos -->
 <div>
   <img src="public/images/For you___page-0001.jpg" class="clickable" alt="photo1" />  
   <img src="public/images/Gentle Push-1_page-0001.jpg" class="clickable" alt="photo2" />  
   <img src="public/images/3h ___page-0001.jpg" class="clickable" alt="photo3" />  
 </div>
 
-<!-- ========================= -->
-<!-- LIGHTBOX HTML -->
-<!-- ========================= -->
 <div id="lightbox">
   <img src="" alt="expanded image">
 </div>
 
-<!-- ========================= -->
-<!-- JAVASCRIPT -->
-<!-- ========================= -->
+<div class="system-status">
+  <div>LOG: <span id="clock">00:00:00</span></div>
+  <div>STREAM: <span id="data-stream">INITIALIZING</span></div>
+  <div>STATUS: <span class="pulse">ACTIVE</span></div>
+</div>
+
 <script>
   // Hamburger toggle
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
-
   hamburger.addEventListener('click', () => {
     mobileMenu.classList.toggle('show');
   });
@@ -279,19 +239,27 @@ I want to write I want to write I want to write I want to write
 
   lightbox.addEventListener("click", () => {
     lightbox.style.display = "none";
-    lightboxImg.src = "";
   });
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      lightbox.style.display = "none";
-      lightboxImg.src = "";
-    }
-  });
+  // Status Bar Logic
+  function updateClock() {
+    const now = new Date();
+    document.getElementById('clock').textContent = now.toLocaleTimeString();
+  }
+
+  const streams = ["MEM_DUMP_01", "FETCH_CORE", "SYNC_X509", "UPLOADING", "ENCRYPT_AES", "IDLE"];
+  function updateStream() {
+    const text = streams[Math.floor(Math.random() * streams.length)];
+    document.getElementById('data-stream').textContent = text;
+  }
+
+  setInterval(updateClock, 1000);
+  setInterval(updateStream, 2500);
+  updateClock();
+  updateStream();
 </script>
 
 </body>
 </html>
-
 
 
