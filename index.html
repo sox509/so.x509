@@ -15,6 +15,21 @@
     background-color: #111;
     font-family: "Courier New", monospace;
     color: #fff;
+    overflow: hidden;
+  }
+
+  .plain-text {
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+
+  .glitch-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
   }
 
   .glitch-text {
@@ -23,30 +38,36 @@
     user-select: none;
     text-align: center;
     white-space: pre;
-    transition: color 0.2s; /* smooth hover effect */
-    color: #fff; /* default white */
+    transition: color 0.2s;
+    color: #fff;
+    z-index: 2;
   }
 
   .glitch-text:hover {
-    color: #0e0e0e; /* turns black on hover */
+    color: #0e0e0e;
   }
 
-  .plain-text {
-    font-size: 15px;
-    text-align: center;
-    margin-bottom: 10px; /* space between texts */
+  /* Large Arrow Styling - Placed at the bottom */
+  #guide-arrow {
+    font-size: 40px; /* Increased size */
+    margin-top: 20px; /* Space above the arrow */
+    opacity: 1; /* Appears immediately */
+    animation: bounceUp 1.5s infinite ease-in-out;
+    pointer-events: none;
+    color: #fff;
+  }
+
+  /* Bouncing animation pointing UP toward the text */
+  @keyframes bounceUp {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
   }
 
   /* Mobile adjustments */
   @media (max-width: 600px) {
-    .glitch-text {
-      font-size: 22px; /* larger for readability on phones */
-    }
-    .plain-text {
-      font-size: 18px;
-      margin-bottom: 15px;
-      padding: 0 10px; /* small padding to prevent overflow */
-    }
+    .glitch-text { font-size: 22px; }
+    .plain-text { font-size: 18px; }
+    #guide-arrow { font-size: 50px; }
   }
 </style>
 </head>
@@ -56,8 +77,12 @@
   welcome to my digital mind // feel free to browse:
 </div>
 
-<div class="glitch-text" id="glitchText" onclick="window.location.href='home.html';">
-  so.x509
+<div class="glitch-container">
+  <div class="glitch-text" id="glitchText" onclick="window.location.href='home.html';">
+    so.x509
+  </div>
+
+  <div id="guide-arrow">↑</div>
 </div>
 
 <script>
@@ -65,7 +90,7 @@
   const baseText = 'so.x509';
 
   // Zalgo marks
-  const zalgoUp = ['̍','̎','̄','̅','̿','̑','̆','̐','͒','͗','͑','̇','̈','̊','͂','̓','̈́','͊','͋','͌','̃','̂','̌','͐','́','̋','̏','̽','̉','ͣ','ͤ','ͥ','ͦ','ͧ','ͨ','ͩ','ͪ','ͫ','ͬ','ͭ','ͮ','ͯ','̾','͛','͆','̚'];
+  const zalgoUp = ['̍','̎','̄','̅','̿','̑','̆','̐','͒','͗','͑','̇','̈','̊','͂','̓','̈́','͊','͋','͌','̃','̂','̌','͐','́','̋','̏','̽','̉','ͣ','ͤ','ͥ','ͦ','ͧ','ͨ','ͩ','ͪ','ͫ','ͬ','ͭ','ͮ','ͯ','̾','͛','͆','̚'];
   const zalgoDown = ['̖','̗','̘','̙','̜','̝','̞','̟','̠','̤','̥','̦','̩','̪','̫','̬','̭','̮','̯','̰','̱','̲','̳','̹','̺','̻','̼','ͅ','͇','͈','͉','͍','͎','͓','͔','͕','͖','͙','͚','̣'];
   const zalgoMid = ['̕','̛','̀','́','͘','̡','̢','̧','̨','̴','̵','̶','͜','͝','͞','͟','͠','͢','̸','̷','͡',' ҉'];
 
@@ -84,7 +109,6 @@
     return result;
   }
 
-  // Slower glitch: update every 400ms
   setInterval(() => {
     textElement.textContent = zalgo(baseText);
   }, 400);
