@@ -4,13 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Homepage</title>
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
   body {
     margin: 0;
     background-color: #000;
     color: #fff;
-    font-family: "Courier New", monospace;
+    font-family: 'IBM Plex Mono', monospace;
     overflow-x: hidden;
+    padding-bottom: 50px; /* Space for the status bar */
   }
 
   /* Top menu for desktop */
@@ -30,10 +34,9 @@
     margin: 0 150px;
     font-size: 16px;
     transition: color 0.2s;
-    font-family: "Courier New", monospace;
+    font-family: 'IBM Plex Mono', monospace;
   }
 
-  nav a:hover,
   nav a:active {
     color: #222;
   }
@@ -86,6 +89,7 @@
     padding: 15px 25px;
     font-size: 18px;
     display: block;
+    font-family: 'IBM Plex Mono', monospace;
   }
 
   #mobileMenu a:hover {
@@ -128,104 +132,123 @@
     border-radius: 12px;
   }
 
+  /* SYSTEM STATUS BAR STYLES */
+  .system-status {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    border-top: 1px solid rgba(218, 255, 44, 0.2);
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 30px;
+    font-size: 10px;
+    color: #daff2c;
+    letter-spacing: 2px;
+    z-index: 1100;
+    box-sizing: border-box;
+    text-transform: uppercase;
+  }
+
+  .pulse {
+    animation: pulse-animation 2s infinite;
+    font-weight: bold;
+  }
+
+  @keyframes pulse-animation {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
   /* Responsive for mobile */
   @media (max-width: 768px) {
-    nav {
-      display: none; /* Hide desktop menu */
-    }
-    #hamburger {
-      display: flex;
-    }
-    #mobileMenu {
-      display: flex;
-    }
+    nav { display: none; }
+    #hamburger { display: flex; }
+    #mobileMenu { display: flex; }
+    p { display: none !important; }
 
-    /* Hide all <p> texts on mobile */
-    p {
-      display: none !important;
-    }
-
-    /* Stack Spotify embeds vertically, move down, stay behind menu */
     #spotifyEmbed,
     #spotifyContainer2 {
       position: relative;
-      top: 50px; /* move down below menu */
+      top: 50px;
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
       max-width: 400px;
       height: auto;
       margin: 20px 0;
-      z-index: 1; /* behind the menu */
+      z-index: 1;
     }
 
     #spotifyEmbed iframe,
     #spotifyContainer2 iframe {
-      height: 380px; /* keep height to show tracks */
+      height: 380px;
+    }
+
+    .system-status {
+      font-size: 8px;
+      padding: 8px 15px;
     }
   }
 </style>
 </head>
 <body>
 
-<!-- Desktop Top menu -->
 <nav id="topMenu">
-  <a href="home.html">h̸o̴m̷e̶</a>
-  <a href="sound.html">s̸ou̴nd̸</a>
-  <a href="writing.html">w̶ritin̷g̷s̴</a>
-  <a href="about.html">a̶b̴o̴u̴t̸</a>
+  <a href="home.html">home</a>
+  <a href="sound.html">sound</a>
+  <a href="writing.html">writings</a>
+  <a href="about.html">about</a>
 </nav>
 
-<!-- Hamburger button for mobile -->
 <div id="hamburger">
   <span></span>
   <span></span>
   <span></span>
 </div>
 
-<!-- Curtain menu for mobile -->
 <div id="mobileMenu">
-  <a href="home.html">h̸o̴m̷e̶</a>
-  <a href="sound.html">s̸ou̴nd̸</a>
-  <a href="writing.html">w̶ritin̷g̷s̴</a>
-  <a href="about.html">a̶b̴o̴u̴t̸</a>
+  <a href="home.html">home</a>
+  <a href="sound.html">sound</a>
+  <a href="writing.html">writings</a>
+  <a href="about.html">about</a>
 </div>
 
-<!-- Random yellow texts -->
-<p style="position:absolute; top:150px; left:50px; font-size:14px; color:yellow; font-family:'Courier New', monospace; max-width:150px;">
+<p style="position:absolute; top:150px; left:50px; font-size:14px; color:#daff2c; font-family:'IBM Plex Mono', monospace; max-width:150px;">
   we are an imageeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 </p>
 
-<p style="position:absolute; top:220px; right:200px; font-size:14px; color:yellow; font-family:'Courier New', monospace; max-width:160px;">
+<p style="position:absolute; top:220px; right:200px; font-size:14px; color:#daff2c; font-family:'IBM Plex Mono', monospace; max-width:160px;">
 tell me >> when??
 ??
 ?
 ?</p>
 
-<p style="position:absolute; top:300px; left:100px; font-size:14px; color:yellow; font-family:'Courier New', monospace; max-width:150px;">
+<p style="position:absolute; top:300px; left:100px; font-size:14px; color:#daff2c; font-family:'IBM Plex Mono', monospace; max-width:150px;">
   no skin just threads,
 </p>
 
-<p style="position:absolute; bottom:100px; left:250px; font-size:14px; color:yellow; font-family:'Courier New', monospace; max-width:160px;">
+<p style="position:absolute; bottom:100px; left:250px; font-size:14px; color:#daff2c; font-family:'IBM Plex Mono', monospace; max-width:160px;">
 ok, pls :-/</p>
 
-<p style="position:absolute; bottom:350px; right:100px; font-size:14px; color:yellow; font-family:'Courier New', monospace; max-width:150px;">
+<p style="position:absolute; bottom:350px; right:100px; font-size:14px; color:#daff2c; font-family:'IBM Plex Mono', monospace; max-width:150px;">
 don't worry we'll d7e anyway </p>
 
-<p style="position:absolute; top:300px; left:800px; font-size:14px; color:yellow; font-family:'Courier New', monospace; max-width:160px;">
+<p style="position:absolute; top:300px; left:800px; font-size:14px; color:#daff2c; font-family:'IBM Plex Mono', monospace; max-width:160px;">
 *****
 qqqqqqqqqqqq</p>
 
-<p style="position:absolute; top:650px; right:180px; font-size:14px; color:yellow; font-family:'Courier New', monospace; max-width:150px;">
+<p style="position:absolute; top:650px; right:180px; font-size:14px; color:#daff2c; font-family:'IBM Plex Mono', monospace; max-width:150px;">
   echoes of groans
           --- groans
           ------- we're made like clones
 </p>
 
-<p style="position:absolute; top:450px; left:70px; font-size:14px; color:yellow; font-family:'Courier New', monospace; max-width:150px;">
+<p style="position:absolute; top:450px; left:70px; font-size:14px; color:#daff2c; font-family:'IBM Plex Mono', monospace; max-width:150px;">
 x8 </p>
 
-<p style="position:absolute; top:600px; left:600px; font-size:14px; color:yellow; font-family:'Courier New', monospace; max-width:200px;">
+<p style="position:absolute; top:600px; left:600px; font-size:14px; color:#daff2c; font-family:'IBM Plex Mono', monospace; max-width:200px;">
 welcome 
 welcome
 welcome
@@ -236,10 +259,9 @@ welcome
 welcome
 </p>
 
-<p style="position:absolute; top:400px; right:300px; font-size:14px; font-family:'Roboto', sans-serif; color:#fff; max-width:300px;">
+<p style="position:absolute; top:400px; right:300px; font-size:14px; font-family:'IBM Plex Mono', monospace; color:#fff; max-width:300px;">
  I N T O / N A R U / M O R I </p>
 
-<!-- Spotify Embed -->
 <div id="spotifyEmbed">
   <iframe data-testid="embed-iframe"
           style="border-radius:12px"
@@ -249,7 +271,6 @@ welcome
           loading="lazy"></iframe>
 </div>
 
-<!-- Second Spotify EP Embed -->
 <div id="spotifyContainer2">
   <iframe data-testid="embed-iframe"
           style="border-radius:12px"
@@ -257,6 +278,12 @@ welcome
           width="500" height="380" frameborder="0"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"></iframe>
+</div>
+
+<div class="system-status">
+  <div>LOG: <span id="clock">00:00:00</span></div>
+  <div>STREAM: <span id="data-stream">IDLE</span></div>
+  <div>STATUS: <span class="pulse">ACTIVE</span></div>
 </div>
 
 <script>
@@ -267,7 +294,25 @@ welcome
   hamburger.addEventListener('click', () => {
     mobileMenu.classList.toggle('show');
   });
+
+  // Status Bar Logic
+  function updateClock() {
+    const now = new Date();
+    document.getElementById('clock').textContent = now.toLocaleTimeString();
+  }
+
+  const streams = ["AUDIO_BUFF", "BIT_CRUSH", "SYNC_PLAY", "FREQ_MOD", "WAVE_GEN", "IDLE"];
+  function updateStream() {
+    const text = streams[Math.floor(Math.random() * streams.length)];
+    document.getElementById('data-stream').textContent = text;
+  }
+
+  setInterval(updateClock, 1000);
+  setInterval(updateStream, 2500);
+  updateClock();
+  updateStream();
 </script>
 
 </body>
 </html>
+
