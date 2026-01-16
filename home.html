@@ -24,10 +24,10 @@
   nav {
     display: flex;
     justify-content: center;
-    padding: 40px 0 20px;
+    padding: 40px 0 20px 0;
     position: sticky;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 10;
     opacity: 0;
     transform: translateY(-20px);
@@ -42,18 +42,17 @@
   nav a {
     color: #fff;
     text-decoration: none;
-    margin: 0 100px;
+    margin: 0 150px;
     font-size: 16px;
     transition: color 0.3s ease;
   }
 
   nav a:hover {
-    color: #FFFF00;
+    color: #222;
   }
 
   /* ===== DESKTOP VIDEO ===== */
   #desktopVideo {
-    display: block;
     width: 100vw;
     height: 100vh;
     object-fit: cover;
@@ -64,17 +63,35 @@
     z-index: -1;
   }
 
+  /* ===== LOADING TEXT ===== */
+  #loading-text {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    color: #daff2c;
+    font-size: 11px;
+    letter-spacing: 1px;
+    z-index: 5;
+    animation: slowFlicker 4s infinite ease-in-out;
+  }
+
+  @keyframes slowFlicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+    70% { opacity: 0.8; }
+    80% { opacity: 0.4; }
+  }
+
   /* ===== MOBILE HIDDEN BY DEFAULT ===== */
   .mobile-section,
   #mobileNav {
     display: none;
   }
 
-  /* ============================= */
   /* ===== MOBILE EXPERIENCE ===== */
-  /* ============================= */
   @media (max-width: 768px) {
 
+    #loading-text,
     nav,
     #desktopVideo {
       display: none;
@@ -90,7 +107,7 @@
       top: 0;
       width: 100%;
       justify-content: center;
-      gap: 30px;
+      gap: 60px;
       padding: 14px 0;
       background-color: #000;
       border-bottom: 1px solid #111;
@@ -106,40 +123,76 @@
 
     .mobile-section {
       display: flex;
-      min-height: auto;
-      padding: 40px 0; /* Reduced top padding since titles are gone */
+      padding: 40px 0;
       flex-direction: column;
       background-color: #000;
+      align-items: center; /* Centers content for mobile */
     }
 
     #mobileHome {
       padding-top: 50px;
     }
 
-    #mobileHome video {
-      width: 100vw;
-      height: auto;
-      max-height: 85vh;
-      object-fit: contain;
-    }
-
+    #mobileHome video,
+    #sound video,
     .mobile-img {
-      width: 100%;
-      height: auto;
+      width: 100vw;
       max-height: 85vh;
       object-fit: contain;
-      display: block;
       margin: 0 auto;
     }
 
-    /* Makes the writings section larger/longer */
+    /* WRITINGS SCALE */
     #writings .mobile-img {
-      max-height: none; 
-      width: 100%;
+      width: 100vw;
+      max-height: none;
     }
-    
+
     #writings {
-      padding: 20px 0; /* Tightens space around the large image */
+      padding-bottom: 10px;
+      overflow: hidden;
+    }
+
+    #about {
+      padding-top: 10px;
+    }
+
+    /* ===== SOCIAL LINKS (MOBILE ONLY) ===== */
+    .social-footer {
+      display: flex;
+      margin-top: 20px; /* Reduced gap to attach closely to image */
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      border-top: 1px solid rgba(218, 255, 44, 0.3);
+      padding: 20px 0 40px 0; /* Extra bottom padding for scrolling comfort */
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .social-icon {
+      color: #daff2c;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 2px;
+      position: relative;
+      text-transform: uppercase;
+      transition: all 0.1s;
+    }
+
+    .social-icon:hover {
+      color: #fff;
+      text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff;
+    }
+
+    .social-icon::before {
+      content: "[ ";
+      opacity: 0.5;
+    }
+
+    .social-icon::after {
+      content: " ]";
+      opacity: 0.5;
     }
   }
 </style>
@@ -154,8 +207,12 @@
   <a href="about.html">about</a>
 </nav>
 
-<video id="desktopVideo" autoplay loop muted playsinline preload="auto">
-  <source src="public\video\HOME(5).mp4">
+<div id="loading-text">
+  LOADING NEXT PHASE....IN THE MEANWHILE, CHECK THE ARCHIVE: SOUND//WRITINGS
+</div>
+
+<video id="desktopVideo" autoplay loop muted playsinline>
+  <source src="public\video\Homepage HD.mp4">
 </video>
 
 <div id="mobileNav">
@@ -166,35 +223,41 @@
 
 <section id="mobileHome" class="mobile-section">
   <video autoplay loop muted playsinline>
-    <source src="public\video\Phone Website about.mp4">
+    <source src="public\video\phone homepage.mp4">
   </video>
 </section>
 
 <section id="sound" class="mobile-section">
-  <video autoplay loop muted playsinline preload="auto">
-    <source src="public\video\Phone Website sound(1).mp4" type="video/mp4">
+  <video autoplay loop muted playsinline>
+    <source src="public\video\Phone Website sound(1).mp4">
   </video>
 </section>
 
 <section id="writings" class="mobile-section">
-  <img src="public\images\I want to write I want to write I want to write I want to write I want to write I want to write I want to write I want to write I want to write I want to write.png" class="mobile-img" alt="Writings">
+  <img src="public\images\Writings phone website.png" class="mobile-img">
 </section>
 
 <section id="about" class="mobile-section">
-  <img src="public\images\Phone Website about(2).png" class="mobile-img" alt="About">
+  <img src="public\images\About phone website(1).png" class="mobile-img">
+  
+  <div class="social-footer">
+    <a href="https://www.instagram.com/so.x509/" target="_blank" class="social-icon">Instagram</a>
+    <a href="https://open.spotify.com/artist/0" target="_blank" class="social-icon">Spotify</a>
+    <a href="mailto:so.x509@post.com" class="social-icon">Email</a>
+  </div>
 </section>
 
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
-      const menu = document.getElementById("topMenu");
-      if (menu) menu.classList.add("show");
+      document.getElementById("topMenu")?.classList.add("show");
     }, 1000);
   });
 </script>
 
 </body>
 </html>
+
 
 
 
