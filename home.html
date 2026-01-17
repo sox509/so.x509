@@ -47,9 +47,7 @@
     transition: color 0.3s ease;
   }
 
-  nav a:hover {
-    color: #222;
-  }
+  
 
   /* ===== DESKTOP VIDEO ===== */
   #desktopVideo {
@@ -253,9 +251,70 @@
       document.getElementById("topMenu")?.classList.add("show");
     }, 1000);
   });
+
+
+
+
+// ===== ZALGO GLITCH FUNCTION =====
+const zalgo_up = ["̍","̎","̄","̅","̿","̑","̆","̐","͒","͗","͑","̇","̈","̊","͂","̓","̈́","͊","͋","͌","̃","̂","̌","͐","̀","́","̋","̏","̒","̓","̔","̽","̉","ͣ","ͤ","ͥ","ͦ","ͧ","ͨ","ͩ","ͪ","ͫ","ͬ","ͭ","ͮ","ͯ"];
+const zalgo_down = ["̖","̗","̘","̙","̜","̝","̞","̟","̠","̤","̥","̦","̩","̪","̫","̬","̭","̮","̯","̰","̱","̲","̳","̹","̺","̻","̼","ͅ","͇","͈","͉","͍","͎","͓","͔","͕","͖","͙","͚","̣"];
+const zalgo_mid = ["̕","̛","̀","́","͘","̡","̢","̧","̨","̴","̵","̶","͜","͝","͞","͟","͠","͢","̸","̷","͡"," ҉"];
+
+function zalgo(text, intensity = 3) {
+  return text.split('').map(c => {
+    let newChar = c;
+    for (let i = 0; i < intensity; i++) {
+      const r = Math.random();
+      if (r < 0.33) newChar += zalgo_up[Math.floor(Math.random() * zalgo_up.length)];
+      else if (r < 0.66) newChar += zalgo_down[Math.floor(Math.random() * zalgo_down.length)];
+      else newChar += zalgo_mid[Math.floor(Math.random() * zalgo_mid.length)];
+    }
+    return newChar;
+  }).join('');
+}
+
+// ===== APPLY ZALGO TO MENU & SOCIAL LINKS =====
+function applyZalgoToElements(selector, intensity = 4) {
+  const elements = document.querySelectorAll(selector);
+  elements.forEach(el => {
+    const originalText = el.textContent;
+
+    // Desktop hover
+    el.addEventListener('mouseenter', () => {
+      el.textContent = zalgo(originalText, intensity);
+    });
+    el.addEventListener('mouseleave', () => {
+      el.textContent = originalText;
+    });
+
+    // Mobile touch
+    el.addEventListener('touchstart', () => {
+      el.textContent = zalgo(originalText, intensity);
+    });
+    el.addEventListener('touchend', () => {
+      el.textContent = originalText;
+    });
+  });
+}
+
+// Apply to all menus and social icons
+applyZalgoToElements('#topMenu a');        // Desktop menu
+applyZalgoToElements('#mobileNav a');      // Mobile menu
+applyZalgoToElements('.social-icon');      // Social links
+
+
+
+
+
+
+
+</script>
+
+
+
+
+  
 </script>
 
 </body>
 </html>
-
-
