@@ -33,13 +33,14 @@
     text-decoration: none;
     margin: 0 150px;
     font-size: 16px;
-    transition: color 0.2s;
+    transition: none; /* Remove hover color transition */
     font-family: inherit;
   }
 
-  nav a:hover,
-  nav a:active {
-    color: #222;
+  /* HOVER COLOR REMOVED */
+  nav a:hover {
+    color: inherit;
+    text-shadow: none;
   }
 
   #hamburger {
@@ -170,11 +171,6 @@
     z-index: 2;
   }
 
-  .vid1 { bottom: 60%; left: 10%; width: 190px; }
-  .vid2 { top: 7%; right: 10%; width: 300px; }
-  .vid3 { bottom: 10%; right: 5%; width: 250px; }
-  .vid4 { bottom: 50%; left: 40%; width: 300px; }
-
   h1 {
     font-size: 45px;
     font-weight: normal;
@@ -237,9 +233,9 @@
 
   .about-bg {
     position: absolute;
-    top: -75px;
-    left: -305px;
-    width: 1900px;
+    top: 0px;
+    left: -295px;
+    width: 1800px;
     mix-blend-mode: screen;
     z-index: 0;
     pointer-events: none;
@@ -256,44 +252,39 @@
     .top-images { transform: translateX(50px); }
   }
 
-/* SOCIAL LINKS SECTION */
-.social-footer {
-    margin-top: 50px;
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    border-top: 1px solid rgba(218, 255, 44, 0.3);
-    padding: 30px 0;
-    width: 100%;
-}
+  /* SOCIAL LINKS SECTION */
+  .social-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      border-top: 1px solid rgba(218, 255, 44, 0.3);
+      padding: 30px 0;
+      width: 100%;
+      position: relative;
+      margin-top: 50px;
+  }
 
-.social-icon {
-    color: #daff2c;
-    text-decoration: none;
-    font-size: 14px;
-    letter-spacing: 2px;
-    position: relative;
-    transition: all 0.1s;
-    text-transform: uppercase;
-}
+  .social-icon {
+      color: #daff2c;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 2px;
+      position: relative;
+      transition: none;
+      text-transform: uppercase;
+  }
 
-.social-icon:before {
-    content: "[ ";
-    opacity: 0.5;
-}
+  .social-icon:before { content: "[ "; opacity: 0.5; }
+  .social-icon:after { content: " ]"; opacity: 0.5; }
 
-.social-icon:after {
-    content: " ]";
-    opacity: 0.5;
-}
+  @media (max-width: 768px) {
+      .social-footer {
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 15px;
+      }
+  }
 
-@media (max-width: 768px) {
-    .social-footer {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-}
 </style>
 </head>
 
@@ -309,7 +300,6 @@
 
 <div id="contentContainer">
   <video src="public\video\home sound blabl ndnoasocms.mp4" class="bg-video" autoplay loop muted playsinline></video>
-  
 </div>
 
 <div id="popupOverlay">
@@ -322,8 +312,8 @@
 
 <div id="afterPopupText" style="display:none;">
   <div class="about-wrapper">
-    <img src="public\images\ABOUT(7).png" class="about-bg" alt="">
-    <h1>About</h1>
+    <img src="public\images\ABOUT(1).jpg" class="about-bg" alt="">
+    <!-- About title removed -->
   </div>
 
   <div class="top-images">
@@ -352,6 +342,12 @@
       <img src="public/images/4.jpg">
     </div>
   </div>
+
+  <div class="social-footer">
+      <a href="https://www.instagram.com/so.x509/" target="_blank" class="social-icon">Instagram</a>
+      <a href="https://open.spotify.com/artist/0" target="_blank" class="social-icon">Spotify</a>
+      <a href="mailto:so.x509@post.com" class="social-icon">Email</a>
+  </div>
 </div>
 
 <div class="system-status">
@@ -360,47 +356,79 @@
   <div>STATUS: <span class="pulse">ACTIVE</span></div>
 </div>
 
-<div class="social-footer">
-    <a href="https://www.instagram.com/so.x509/" target="_blank" class="social-icon">Instagram</a>
-    <a href="https://open.spotify.com/artist/0" target="_blank" class="social-icon">Spotify</a>
-    <a href="mailto:so.x509@post.com" class="social-icon">Email</a>
-</div>
-
 <script>
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
 
-  hamburger.onclick = () => mobileMenu.classList.toggle('show');
+hamburger.onclick = () => mobileMenu.classList.toggle('show');
 
-  window.onload = () => {
-    setTimeout(() => {
-      popupOverlay.style.display = "flex";
-      setTimeout(() => popupMainText.style.opacity = 1, 100);
-    }, 1500);
+window.onload = () => {
+  setTimeout(() => {
+    popupOverlay.style.display = "flex";
+    setTimeout(() => popupMainText.style.opacity = 1, 100);
+  }, 1500);
 
-    closePopup.onclick = () => {
-      popupOverlay.style.display = "none";
-      contentContainer.style.display = "none";
-      afterPopupText.style.display = "block";
-      setTimeout(() => afterPopupText.style.opacity = 1, 50);
-    };
+  closePopup.onclick = () => {
+    popupOverlay.style.display = "none";
+    contentContainer.style.display = "none";
+    afterPopupText.style.display = "block";
+    setTimeout(() => afterPopupText.style.opacity = 1, 50);
   };
+};
 
-  function updateClock() {
-    const now = new Date();
-    document.getElementById('clock').textContent = now.toLocaleTimeString();
-  }
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleTimeString();
+}
 
-  const streams = ["MEM_RECOVERY", "DEPTH_SYNC", "BIO_METRIC", "NEURAL_DUMP", "DATA_LAKE", "IDLE"];
-  function updateStream() {
-    const text = streams[Math.floor(Math.random() * streams.length)];
-    document.getElementById('data-stream').textContent = text;
-  }
+const streams = ["MEM_RECOVERY", "DEPTH_SYNC", "BIO_METRIC", "NEURAL_DUMP", "DATA_LAKE", "IDLE"];
+function updateStream() {
+  const text = streams[Math.floor(Math.random() * streams.length)];
+  document.getElementById('data-stream').textContent = text;
+}
 
-  setInterval(updateClock, 1000);
-  setInterval(updateStream, 2500);
-  updateClock();
-  updateStream();
+setInterval(updateClock, 1000);
+setInterval(updateStream, 2500);
+updateClock();
+updateStream();
+
+// ===== ZALGO GLITCH =====
+const zalgo_up = ["̍","̎","̄","̅","̿","̑","̆","̐","͒","͗","͑","̇","̈","̊","͂","̓","̈́","͊","͋","͌","̃","̂","̌","͐","̀","́","̋","̏","̒","̓","̔","̽","̉","ͣ","ͤ","ͥ","ͦ","ͧ","ͨ","ͩ","ͪ","ͫ","ͬ","ͭ","ͮ","ͯ"];
+const zalgo_down = ["̖","̗","̘","̙","̜","̝","̞","̟","̠","̤","̥","̦","̩","̪","̫","̬","̭","̮","̯","̰","̱","̲","̳","̹","̺","̻","̼","ͅ","͇","͈","͉","͍","͎","͓","͔","͕","͖","͙","͚","̣"];
+const zalgo_mid = ["̕","̛","̀","́","͘","̡","̢","̧","̨","̴","̵","̶","͜","͝","͞","͟","͠","͢","̸","̷","͡"," ҉"];
+
+function zalgo(text, intensity = 3) {
+  return text.split('').map(c => {
+    let newChar = c;
+    for (let i = 0; i < intensity; i++) {
+      const r = Math.random();
+      if (r < 0.33) newChar += zalgo_up[Math.floor(Math.random() * zalgo_up.length)];
+      else if (r < 0.66) newChar += zalgo_down[Math.floor(Math.random() * zalgo_down.length)];
+      else newChar += zalgo_mid[Math.floor(Math.random() * zalgo_mid.length)];
+    }
+    return newChar;
+  }).join('');
+}
+
+// Social icons
+const socialIcons = document.querySelectorAll('.social-icon');
+socialIcons.forEach(icon => {
+  const originalText = icon.textContent;
+  icon.addEventListener('mouseenter', () => icon.textContent = zalgo(originalText, 5));
+  icon.addEventListener('mouseleave', () => icon.textContent = originalText);
+  icon.addEventListener('touchstart', () => icon.textContent = zalgo(originalText, 5));
+  icon.addEventListener('touchend', () => icon.textContent = originalText);
+});
+
+// Menu links
+const menuLinks = document.querySelectorAll('nav a');
+menuLinks.forEach(link => {
+  const originalText = link.textContent;
+  link.addEventListener('mouseenter', () => link.textContent = zalgo(originalText, 4));
+  link.addEventListener('mouseleave', () => link.textContent = originalText);
+  link.addEventListener('touchstart', () => link.textContent = zalgo(originalText, 4));
+  link.addEventListener('touchend', () => link.textContent = originalText);
+});
 </script>
 
 </body>
