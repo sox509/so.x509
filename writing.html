@@ -14,14 +14,13 @@
     color: #fff;
     font-family: 'IBM Plex Mono', monospace;
     overflow-x: hidden;
-    padding-bottom: 40px; /* Space for the status bar */
+    padding-bottom: 40px;
   }
 
-  /* Top menu for desktop */
   nav {
     display: flex;
     justify-content: center;
-    padding: 40px 0 20px 0;
+    padding: 40px 0 20px;
     position: sticky;
     top: 0;
     background-color: #000;
@@ -33,12 +32,8 @@
     text-decoration: none;
     margin: 0 150px;
     font-size: 16px;
-    transition: color 0.2s;
   }
 
- 
-
-  /* Hamburger button for mobile */
   #hamburger {
     display: none;
     position: fixed;
@@ -59,7 +54,6 @@
     border-radius: 2px;
   }
 
-  /* Curtain menu for mobile */
   #mobileMenu {
     display: none;
     position: fixed;
@@ -70,10 +64,9 @@
     background-color: #111;
     padding-top: 80px;
     flex-direction: column;
-    align-items: flex-start;
     z-index: 15;
-    transition: transform 0.3s ease;
     transform: translateX(100%);
+    transition: transform 0.3s ease;
   }
 
   #mobileMenu.show {
@@ -85,31 +78,59 @@
     text-decoration: none;
     padding: 15px 25px;
     font-size: 18px;
-    display: block;
   }
 
-  /* Desktop paragraph */
   p {
     position: absolute;
-    top:100px;
-    left:30px;
-    font-size:14px;
-    color:#daff2c;
-    max-width:140px;
+    top: 120px;
+    left: 30px;
+    font-size: 14px;
+    color: #daff2c;
+    max-width: 140px;
   }
 
-  /* Three photos */
-  img.clickable:nth-child(1) { position:absolute; bottom:300px; left:100px; width:430px; height:auto; }
-  img.clickable:nth-child(2) { position:absolute; bottom:50px; left:545px; width:430px; height:auto; }
-  img.clickable:nth-child(3) { position:absolute; top:300px; right:100px; width:430px; height:auto; }
+  .stair {
+    position: absolute;
+    width: 430px;
+    max-width: min(430px, 90vw);
+    height: auto;
+  }
 
-  /* LIGHTBOX STYLES */
+  /* TOP LEFT → BOTTOM RIGHT */
+  .stair-1 {
+    top: 100px;
+    left: 100px;
+  }
+
+  .stair-2 {
+    top: 200px;
+    left: 554px;
+  }
+
+  .stair-3 {
+    top: 300px;
+    left: 1010px;
+  }
+
+  .clickable {
+    cursor: zoom-in;
+    outline: 1px solid rgba(218, 255, 44, 0.15);
+    outline-offset: 6px;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      filter 0.25s ease;
+  }
+
+  .clickable:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 30px rgba(218, 255, 44, 0.35);
+    filter: brightness(1.05);
+  }
+
   #lightbox {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
     background: rgba(0, 0, 0, 0.95);
     display: none;
     justify-content: center;
@@ -124,7 +145,6 @@
     box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
   }
 
-  /* SYSTEM STATUS BAR STYLES */
   .system-status {
     position: fixed;
     bottom: 0;
@@ -139,28 +159,42 @@
     color: #daff2c;
     letter-spacing: 2px;
     z-index: 1100;
-    box-sizing: border-box;
     text-transform: uppercase;
   }
 
   .pulse {
-    animation: pulse-animation 2s infinite;
+    animation: pulse 2s infinite;
     font-weight: bold;
   }
 
-  @keyframes pulse-animation {
+  @keyframes pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.3; }
   }
 
-  /* Mobile Responsive */
   @media (max-width: 768px) {
     #hamburger { display: flex; }
     #mobileMenu { display: flex; }
     nav { display: none; }
-    p { position: relative; top: 0; left: 0; padding: 20px; max-width: 100%; }
-    img.clickable { position: relative !important; left: 0 !important; right: 0 !important; top: 0 !important; bottom: 0 !important; width: 90%; margin: 20px auto; display: block; }
-    .system-status { font-size: 8px; padding: 8px 15px; }
+
+    p {
+      position: relative;
+      padding: 20px;
+      max-width: 100%;
+    }
+
+    img.clickable {
+      position: relative !important;
+      width: 90%;
+      margin: 20px auto;
+      display: block;
+      outline-offset: 4px;
+    }
+
+    .system-status {
+      font-size: 8px;
+      padding: 8px 15px;
+    }
   }
 </style>
 </head>
@@ -175,9 +209,7 @@
 </nav>
 
 <div id="hamburger">
-  <span></span>
-  <span></span>
-  <span></span>
+  <span></span><span></span><span></span>
 </div>
 
 <div id="mobileMenu">
@@ -188,21 +220,25 @@
 </div>
 
 <p>
-I want to write I want to write I want to write I want to write I want to write I want to write I want to write 
-I want to write I want to write I want to write I want to write I want to write I want to write I want to write 
-I want to write I want to write I want to write I want to write I want to write I want to write I want to write 
-I want to write I want to write I want to write I want to write I want to write I want to write I want to write 
-I want to write I want to write I want to write I want to write I want to write I want to write I want to write
-I want to write I want to write I want to write I want to write I want to write I want to write I want to write
-I want to write I want to write I want to write 
+I want to write I want to write I want to write I want to write I want to write
+I want to write I want to write I want to write I want to write
+I want to write I want to write I want to write I want to write
+I want to write I want to write I want to write I want to write
+I want to write I want to write I want to write I want to write
+I want to write I want to write I want to write I want to write
+I want to write I want to write I want to write I want to write
+I want to write I want to write I want to write I want to write
+I want to write I want to write I want to write I want to write
+I want to write I want to write I want to write I want to write
+I want to write I want to write I want to write I want to write
+
+
 
 </p>
 
-<div>
-  <img src="public/images/For you___page-0001.jpg" class="clickable" alt="photo1" />  
-  <img src="public/images/Gentle Push-1_page-0001.jpg" class="clickable" alt="photo2" />  
-  <img src="public/images/3h ___page-0001.jpg" class="clickable" alt="photo3" />  
-</div>
+<img src="public/images/For you___page-0001.jpg" class="clickable stair stair-1" alt="photo1">
+<img src="public/images/Gentle Push-1_page-0001.jpg" class="clickable stair stair-2" alt="photo2">
+<img src="public/images/3h ___page-0001.jpg" class="clickable stair stair-3" alt="photo3">
 
 <div id="lightbox">
   <img src="" alt="expanded image">
@@ -215,49 +251,36 @@ I want to write I want to write I want to write
 </div>
 
 <script>
-  // Hamburger toggle
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
-  hamburger.addEventListener('click', () => {
-    mobileMenu.classList.toggle('show');
-  });
+  hamburger.onclick = () => mobileMenu.classList.toggle('show');
 
-  // Lightbox functionality
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = lightbox.querySelector("img");
-  const images = document.querySelectorAll(".clickable");
 
-  images.forEach(img => {
-    img.addEventListener("click", () => {
+  document.querySelectorAll(".clickable").forEach(img => {
+    img.onclick = () => {
       lightboxImg.src = img.src;
       lightbox.style.display = "flex";
-    });
+    };
   });
 
-  lightbox.addEventListener("click", () => {
-    lightbox.style.display = "none";
-  });
+  lightbox.onclick = () => lightbox.style.display = "none";
 
-  // Status Bar Logic
   function updateClock() {
-    const now = new Date();
-    document.getElementById('clock').textContent = now.toLocaleTimeString();
+    document.getElementById('clock').textContent = new Date().toLocaleTimeString();
   }
 
   const streams = ["MEM_DUMP_01", "FETCH_CORE", "SYNC_X509", "UPLOADING", "ENCRYPT_AES", "IDLE"];
   function updateStream() {
-    const text = streams[Math.floor(Math.random() * streams.length)];
-    document.getElementById('data-stream').textContent = text;
+    document.getElementById('data-stream').textContent =
+      streams[Math.floor(Math.random() * streams.length)];
   }
 
   setInterval(updateClock, 1000);
   setInterval(updateStream, 2500);
   updateClock();
   updateStream();
-
-
-
-
 
 
 // ===== ZALGO GLITCH FUNCTION =====
@@ -278,37 +301,20 @@ function zalgo(text, intensity = 3) {
   }).join('');
 }
 
-// ===== APPLY ZALGO TO MENU & SOCIAL LINKS =====
 function applyZalgoToElements(selector, intensity = 4) {
   const elements = document.querySelectorAll(selector);
   elements.forEach(el => {
     const originalText = el.textContent;
-
-    // Desktop hover
-    el.addEventListener('mouseenter', () => {
-      el.textContent = zalgo(originalText, intensity);
-    });
-    el.addEventListener('mouseleave', () => {
-      el.textContent = originalText;
-    });
-
-    // Mobile touch
-    el.addEventListener('touchstart', () => {
-      el.textContent = zalgo(originalText, intensity);
-    });
-    el.addEventListener('touchend', () => {
-      el.textContent = originalText;
-    });
+    el.addEventListener('mouseenter', () => { el.textContent = zalgo(originalText, intensity); });
+    el.addEventListener('mouseleave', () => { el.textContent = originalText; });
+    el.addEventListener('touchstart', () => { el.textContent = zalgo(originalText, intensity); });
+    el.addEventListener('touchend', () => { el.textContent = originalText; });
   });
 }
 
-// Apply to all menus and social icons
-applyZalgoToElements('#topMenu a');        // Desktop menu
-applyZalgoToElements('#mobileNav a');      // Mobile menu
-applyZalgoToElements('.social-icon');      // Social links
-
-
-
+// Apply to menus
+applyZalgoToElements('#topMenu a');      // desktop
+applyZalgoToElements('#mobileMenu a');   // mobile
 
 
   
@@ -316,3 +322,5 @@ applyZalgoToElements('.social-icon');      // Social links
 
 </body>
 </html>
+
+
