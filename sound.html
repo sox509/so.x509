@@ -37,9 +37,6 @@
     font-family: 'IBM Plex Mono', monospace;
   }
 
-  nav a:active {
-    color: #222;
-  }
 
   /* Hamburger button for mobile */
   #hamburger {
@@ -98,9 +95,9 @@
 
   /* Spotify Embeds Desktop */
   #spotifyEmbed {
-    position: fixed;
+    position: absolute;
     top: 450px;
-    right: 180px;
+    right: 200px;
     z-index: 100;
     width: 300px;
     height: 300px;
@@ -259,7 +256,7 @@ welcome
 welcome
 </p>
 
-<p style="position:absolute; top:400px; right:300px; font-size:14px; font-family:'IBM Plex Mono', monospace; color:#fff; max-width:300px;">
+<p style="position:absolute; top:400px; right:250px; font-size:14px; font-family:'IBM Plex Mono', monospace; color:#fff; max-width:300px;">
  I N T O / N A R U / M O R I </p>
 
 <div id="spotifyEmbed">
@@ -272,12 +269,19 @@ welcome
 </div>
 
 <div id="spotifyContainer2">
-  <iframe data-testid="embed-iframe"
-          style="border-radius:12px"
-          src="https://open.spotify.com/embed/album/1iBrzfGzjleQIAc64wssL7?utm_source=generator&theme=0"
-          width="500" height="380" frameborder="0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"></iframe>
+
+    <iframe 
+      width="100%" 
+      height="450" 
+      scrolling="no" 
+      frameborder="no" 
+      allow="autoplay" 
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%3Aplaylists%3A2179078427%3Fsecret_token%3Ds-A5p5gLW17w9&color=%238c8cbc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+    </iframe>
+
+ 
+  </div>
+
 </div>
 
 <div class="system-status">
@@ -311,6 +315,61 @@ welcome
   setInterval(updateStream, 2500);
   updateClock();
   updateStream();
+
+
+
+// ===== ZALGO GLITCH FUNCTION =====
+const zalgo_up = ["̍","̎","̄","̅","̿","̑","̆","̐","͒","͗","͑","̇","̈","̊","͂","̓","̈́","͊","͋","͌","̃","̂","̌","͐","̀","́","̋","̏","̒","̓","̔","̽","̉","ͣ","ͤ","ͥ","ͦ","ͧ","ͨ","ͩ","ͪ","ͫ","ͬ","ͭ","ͮ","ͯ"];
+const zalgo_down = ["̖","̗","̘","̙","̜","̝","̞","̟","̠","̤","̥","̦","̩","̪","̫","̬","̭","̮","̯","̰","̱","̲","̳","̹","̺","̻","̼","ͅ","͇","͈","͉","͍","͎","͓","͔","͕","͖","͙","͚","̣"];
+const zalgo_mid = ["̕","̛","̀","́","͘","̡","̢","̧","̨","̴","̵","̶","͜","͝","͞","͟","͠","͢","̸","̷","͡"," ҉"];
+
+function zalgo(text, intensity = 3) {
+  return text.split('').map(c => {
+    let newChar = c;
+    for (let i = 0; i < intensity; i++) {
+      const r = Math.random();
+      if (r < 0.33) newChar += zalgo_up[Math.floor(Math.random() * zalgo_up.length)];
+      else if (r < 0.66) newChar += zalgo_down[Math.floor(Math.random() * zalgo_down.length)];
+      else newChar += zalgo_mid[Math.floor(Math.random() * zalgo_mid.length)];
+    }
+    return newChar;
+  }).join('');
+}
+
+// ===== APPLY ZALGO TO MENU & SOCIAL LINKS =====
+function applyZalgoToElements(selector, intensity = 4) {
+  const elements = document.querySelectorAll(selector);
+  elements.forEach(el => {
+    const originalText = el.textContent;
+
+    // Desktop hover
+    el.addEventListener('mouseenter', () => {
+      el.textContent = zalgo(originalText, intensity);
+    });
+    el.addEventListener('mouseleave', () => {
+      el.textContent = originalText;
+    });
+
+    // Mobile touch
+    el.addEventListener('touchstart', () => {
+      el.textContent = zalgo(originalText, intensity);
+    });
+    el.addEventListener('touchend', () => {
+      el.textContent = originalText;
+    });
+  });
+}
+
+// Apply to all menus and social icons
+applyZalgoToElements('#topMenu a');        // Desktop menu
+applyZalgoToElements('#mobileNav a');      // Mobile menu
+applyZalgoToElements('.social-icon');      // Social links
+
+
+
+
+
+  
 </script>
 
 </body>
