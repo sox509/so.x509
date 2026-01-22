@@ -16,9 +16,7 @@
     overflow-x: hidden;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   /* ===== DESKTOP TOP MENU ===== */
   nav {
@@ -34,10 +32,7 @@
     transition: opacity 1.5s ease, transform 1.5s ease;
   }
 
-  nav.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  nav.show { opacity: 1; transform: translateY(0); }
 
   nav a {
     color: #fff;
@@ -47,13 +42,10 @@
     transition: color 0.3s ease;
   }
 
-  
-
-  /* ===== DESKTOP VIDEO ===== */
   #desktopVideo {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    object-fit: cover;
+    object-fit: cover; 
     position: fixed;
     top: 50%;
     left: 50%;
@@ -61,7 +53,6 @@
     z-index: -1;
   }
 
-  /* ===== LOADING TEXT ===== */
   #loading-text {
     position: fixed;
     bottom: 30px;
@@ -80,119 +71,148 @@
     80% { opacity: 0.4; }
   }
 
-  /* ===== MOBILE HIDDEN BY DEFAULT ===== */
-  .mobile-section,
-  #mobileNav {
-    display: none;
-  }
-
   /* ===== MOBILE EXPERIENCE ===== */
+  .mobile-section, #mobileMenuTrigger, #mobileMenuOverlay { display: none; }
+
   @media (max-width: 768px) {
+    #loading-text, nav, #desktopVideo { display: none !important; }
+    body { overflow-y: auto; }
 
-    #loading-text,
-    nav,
-    #desktopVideo {
-      display: none;
+    #mobileMenuTrigger {
+      display: block;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10001;
+      color: #daff2c;
+      font-size: 18px;
+      cursor: pointer;
+      background: rgba(0,0,0,0.8);
+      padding: 8px 12px;
+      border: 1px solid #daff2c;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
-    body {
-      overflow-y: auto;
-    }
-
-    #mobileNav {
-      display: flex;
+    #mobileMenuOverlay {
+      display: none; 
       position: fixed;
       top: 0;
-      width: 100%;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.98);
+      backdrop-filter: blur(15px);
+      z-index: 10000;
+      flex-direction: column;
       justify-content: center;
-      gap: 60px;
-      padding: 14px 0;
-      background-color: #000;
-      border-bottom: 1px solid #111;
-      z-index: 999;
-      font-size: 14px;
+      align-items: center;
+      gap: 35px;
     }
 
-    #mobileNav a {
+    #mobileMenuOverlay.active { display: flex; }
+
+    #mobileMenuOverlay a {
       color: #fff;
       text-decoration: none;
-      opacity: 0.85;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 5px;
     }
 
     .mobile-section {
       display: flex;
-      padding: 40px 0;
+      padding: 20px 0 20px 0;
       flex-direction: column;
       background-color: #000;
-      align-items: center; /* Centers content for mobile */
+      align-items: center;
+      position: relative;
     }
 
-    #mobileHome {
-      padding-top: 50px;
+    .mobile-section::before {
+      content: attr(data-label);
+      align-self: flex-start;
+      padding-left: 20px;
+      color: #daff2c;
+      font-size: 10px;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+      opacity: 0.8;
     }
 
-    #mobileHome video,
-    #sound video,
-    .mobile-img {
-      width: 100vw;
-      max-height: 85vh;
+    /* Video scaling */
+    #mobileHome video, .mobile-img {
+      width: 100%;
+      max-height: 80vh;
       object-fit: contain;
-      margin: 0 auto;
     }
 
-    /* WRITINGS SCALE */
-    #writings .mobile-img {
-      width: 100vw;
-      max-height: none;
+   
+
+    .soundcloud-embed { border: none; }
+
+
+
+    .writings-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      padding: 0 15px; 
+      box-sizing: border-box;
     }
 
-    #writings {
-      padding-bottom: 10px;
-      overflow: hidden;
+    .writings-container img { width: 100%; height: auto; display: block; }
+
+    .system-readout {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      padding: 15px 20px 5px 20px;
+      color: #daff2c;
+      font-size: 11px;
+      box-sizing: border-box;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    #about {
-      padding-top: 10px;
+    .status-bar {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 20px 15px 20px;
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.4);
+      border-bottom: 1px solid #1a1a1a;
+      box-sizing: border-box;
     }
 
-    /* ===== SOCIAL LINKS (MOBILE ONLY) ===== */
     .social-footer {
       display: flex;
-      margin-top: 20px; /* Reduced gap to attach closely to image */
+      margin-top: 30px;
       justify-content: center;
-      align-items: center;
-      gap: 15px;
-      border-top: 1px solid rgba(218, 255, 44, 0.3);
-      padding: 20px 0 40px 0; /* Extra bottom padding for scrolling comfort */
+      gap: 20px;
+      border-top: 1px solid rgba(218, 255, 44, 0.2);
+      padding: 10px 0 30px 0;
       width: 100%;
-      flex-wrap: wrap;
     }
 
-    .social-icon {
-      color: #daff2c;
-      text-decoration: none;
-      font-size: 14px;
-      letter-spacing: 2px;
-      position: relative;
-      text-transform: uppercase;
-      transition: all 0.1s;
-    }
-
-    .social-icon:hover {
-      color: #fff;
-      text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff;
-    }
-
-    .social-icon::before {
-      content: "[ ";
-      opacity: 0.5;
-    }
-
-    .social-icon::after {
-      content: " ]";
-      opacity: 0.5;
-    }
+    .social-icon { color: #daff2c; text-decoration: none; font-size: 13px; text-transform: uppercase; }
   }
+
+  /* ABOUT CONTENT STYLES */
+  .about-content {
+    width: 90%;
+    padding: 30px 20px;
+    margin: 0 auto;
+    border: 1px solid rgba(218, 255, 44, 0.3);
+    background-color: #050505;
+  }
+  .about-content p { font-size: 13px; line-height: 1.6; margin-bottom: 15px; }
+  .about-gallery { width: 90%; display: flex; justify-content: space-between; margin: 20px 0; }
+  .gallery-img { width: 31%; height: auto; object-fit: cover; }
 </style>
 </head>
 
@@ -205,115 +225,131 @@
   <a href="about.html">about</a>
 </nav>
 
-<div id="loading-text">
-  LOADING NEXT PHASE....IN THE MEANWHILE, CHECK THE ARCHIVE: SOUND//WRITINGS
-</div>
+<div id="loading-text">LOADING NEXT PHASE...</div>
 
 <video id="desktopVideo" autoplay loop muted playsinline>
-  <source src="public\video\Homepage HD.mp4">
+  <source src="public/video/Homepage HD.mp4">
 </video>
 
-<div id="mobileNav">
-  <a href="#sound">sound</a>
-  <a href="#writings">writings</a>
-  <a href="#about">about</a>
+<div id="mobileMenuTrigger" onclick="toggleMobileMenu()">MENU</div>
+
+<div id="mobileMenuOverlay">
+  <a href="#mobileHome" onclick="toggleMobileMenu()">HOME</a>
+  <a href="#sound" onclick="toggleMobileMenu()">SOUND</a>
+  <a href="#writings" onclick="toggleMobileMenu()">WRITINGS</a>
+  <a href="#about" onclick="toggleMobileMenu()">ABOUT</a>
+  <div style="color:#daff2c; margin-top: 50px; font-size: 11px; cursor:pointer;" onclick="toggleMobileMenu()">[ EXIT_MENU ]</div>
 </div>
 
-<section id="mobileHome" class="mobile-section">
-  <video autoplay loop muted playsinline>
-    <source src="public\video\phone homepage longer.mp4">
-  </video>
+<section id="mobileHome" class="mobile-section" data-label="01 // HOME">
+    <video autoplay loop muted playsinline>
+        <source src="public/video/phone homepage longer.mp4">
+    </video>
+    <div id="stream-home" class="system-readout">INITIALIZING...</div>
+    <div class="status-bar"><span>TIME: <span id="clock-home">00:00:00</span></span><span>STATUS: LIVE</span></div>
 </section>
 
-<section id="sound" class="mobile-section">
-  <video autoplay loop muted playsinline>
-    <source src="public\video\Phone Website about(3).mp4">
-  </video>
+   
+<section id="sound" class="mobile-section" data-label="02 // SOUND">
+
+  <div class="embed-container" style="min-height: 450px; width: 90%; margin: 0 auto;">
+    
+    <iframe 
+      width="100%" 
+      height="450" 
+      scrolling="no" 
+      frameborder="no" 
+      allow="autoplay" 
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%3Aplaylists%3A2179078427%3Fsecret_token%3Ds-A5p5gLW17w9&color=%238c8cbc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+    </iframe>
+
+    <div style="font-size: 10px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif; font-weight: 100; margin-top: 5px;">
+      <a href="https://soundcloud.com/suzsounds" title="so.x509" target="_blank" style="color: #cccccc; text-decoration: none;">so.x509</a> · 
+      <a href="https://soundcloud.com/suzsounds/sets/fish-in-apool/s-A5p5gLW17w9" title="fish in a//&lt;pool&gt;" target="_blank" style="color: #cccccc; text-decoration: none;">fish in a//&lt;pool&gt;</a>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div id="stream-sound" class="system-readout">FETCH_AUDIO...</div>
+  <div class="status-bar"><span>BITRATE: 1411KBPS</span><span>SRC: X509</span></div>
 </section>
 
-<section id="writings" class="mobile-section">
-  <img src="public\images\Writings phone website trial.png" class="mobile-img">
+
+<section id="writings" class="mobile-section" data-label="03 // WRITINGS">
+    <div class="writings-container">
+        <img src="public/images/Gentle Push-1_page-0001.jpg" class="mobile-img">
+        <img src="public/images/For you___page-0001.jpg" class="mobile-img">
+        <img src="public/images/3h ___page-0001.jpg" class="mobile-img">
+    </div>
+    <div id="stream-writings" class="system-readout">PARSING_LOGS...</div>
+    <div class="status-bar"><span>TYPE: RAW_TEXT</span><span>LOG_ENTRY: 03</span></div>
 </section>
 
-<section id="about" class="mobile-section">
-  <img src="public\images\About phone website(2).png" class="mobile-img">
+<section id="about" class="mobile-section" data-label="04 // ABOUT">
+  <div class="about-content">
+    <p>So.x509 is a collection of poems; experimental, dark, and ethereal melodies.</p>
+
+    <p>So.x509 is a producer, writer, and composer — a painter of worlds that exist between reality and virtual dreams.</p>
+
+    <p>So.x509 is cockroaches and the colour blue.</p>
+    <p>So.x509 is a computer.</p>
+    <p>Is a human.</p>
+    <p>Is the brain.</p>
+
+    <p>Is the software engineer of digital emotions.</p>
+
+    <p>In a world that feels more computational on the outside than on the inside, she’s trying.</p>
+
+<p class="meta-text" style="color: #daff2c;">CORE_VERSION: 2.0.26<br>LOC: UNDISCLOSED</p>
+  </div>
   
+  <div class="about-gallery">
+    <img src="public/images/2.jpg" class="gallery-img">
+    <img src="public/images/3.jpg" class="gallery-img">
+    <img src="public/images/4.jpg" class="gallery-img">
+  </div>
+
   <div class="social-footer">
-    <a href="https://www.instagram.com/so.x509/" target="_blank" class="social-icon">Instagram</a>
-    <a href="https://open.spotify.com/artist/0" target="_blank" class="social-icon">Spotify</a>
-    <a href="mailto:so.x509@post.com" class="social-icon">Email</a>
+      <a href="mailto:so.x509@post.com" class="social-icon">[email]</a>
+
+    <a href="https://open.spotify.com/artist/0Jevy8EUZIQwpzU7jkxvVu" target="_blank" class="social-icon">[spotify]</a>
+        <a href="https://www.instagram.com/so.x509/" target="_blank" class="social-icon">[social]</a>
+
   </div>
 </section>
 
 <script>
   window.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-      document.getElementById("topMenu")?.classList.add("show");
-    }, 1000);
+    setTimeout(() => { document.getElementById("topMenu")?.classList.add("show"); }, 1000);
+    setInterval(updateSystemUI, 1000);
+    setInterval(updateDataStreams, 2000);
   });
 
+  function toggleMobileMenu() {
+    const overlay = document.getElementById('mobileMenuOverlay');
+    overlay.classList.toggle('active');
+  }
 
+  function updateSystemUI() {
+    const time = new Date().toLocaleTimeString();
+    const clock = document.getElementById('clock-home');
+    if(clock) clock.textContent = time;
+  }
 
-
-// ===== ZALGO GLITCH FUNCTION =====
-const zalgo_up = ["̍","̎","̄","̅","̿","̑","̆","̐","͒","͗","͑","̇","̈","̊","͂","̓","̈́","͊","͋","͌","̃","̂","̌","͐","̀","́","̋","̏","̒","̓","̔","̽","̉","ͣ","ͤ","ͥ","ͦ","ͧ","ͨ","ͩ","ͪ","ͫ","ͬ","ͭ","ͮ","ͯ"];
-const zalgo_down = ["̖","̗","̘","̙","̜","̝","̞","̟","̠","̤","̥","̦","̩","̪","̫","̬","̭","̮","̯","̰","̱","̲","̳","̹","̺","̻","̼","ͅ","͇","͈","͉","͍","͎","͓","͔","͕","͖","͙","͚","̣"];
-const zalgo_mid = ["̕","̛","̀","́","͘","̡","̢","̧","̨","̴","̵","̶","͜","͝","͞","͟","͠","͢","̸","̷","͡"," ҉"];
-
-function zalgo(text, intensity = 3) {
-  return text.split('').map(c => {
-    let newChar = c;
-    for (let i = 0; i < intensity; i++) {
-      const r = Math.random();
-      if (r < 0.33) newChar += zalgo_up[Math.floor(Math.random() * zalgo_up.length)];
-      else if (r < 0.66) newChar += zalgo_down[Math.floor(Math.random() * zalgo_down.length)];
-      else newChar += zalgo_mid[Math.floor(Math.random() * zalgo_mid.length)];
-    }
-    return newChar;
-  }).join('');
-}
-
-// ===== APPLY ZALGO TO MENU & SOCIAL LINKS =====
-function applyZalgoToElements(selector, intensity = 4) {
-  const elements = document.querySelectorAll(selector);
-  elements.forEach(el => {
-    const originalText = el.textContent;
-
-    // Desktop hover
-    el.addEventListener('mouseenter', () => {
-      el.textContent = zalgo(originalText, intensity);
+  const logs = ["MEM_DUMP_01", "FETCH_CORE", "SYNC_X509", "UPLOADING", "ENCRYPT_AES", "IDLE"];
+  function updateDataStreams() {
+    const ids = ['stream-home', 'stream-sound', 'stream-writings'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.textContent = logs[Math.floor(Math.random() * logs.length)];
     });
-    el.addEventListener('mouseleave', () => {
-      el.textContent = originalText;
-    });
-
-    // Mobile touch
-    el.addEventListener('touchstart', () => {
-      el.textContent = zalgo(originalText, intensity);
-    });
-    el.addEventListener('touchend', () => {
-      el.textContent = originalText;
-    });
-  });
-}
-
-// Apply to all menus and social icons
-applyZalgoToElements('#topMenu a');        // Desktop menu
-applyZalgoToElements('#mobileNav a');      // Mobile menu
-applyZalgoToElements('.social-icon');      // Social links
-
-
-
-
-
-
-
-</script>
-
-
-
-
-  
+  }
 </script>
 
 </body>
