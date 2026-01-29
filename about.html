@@ -15,7 +15,7 @@
     color: #fff;
     font-family: 'IBM Plex Mono', monospace;
     overflow-x: hidden;
-    padding-bottom: 60px; /* Space for the status bar */
+    padding-bottom: 60px;
   }
 
   nav {
@@ -33,11 +33,10 @@
     text-decoration: none;
     margin: 0 150px;
     font-size: 16px;
-    transition: none; /* Remove hover color transition */
+    transition: none;
     font-family: inherit;
   }
 
-  /* HOVER COLOR REMOVED */
   nav a:hover {
     color: inherit;
     text-shadow: none;
@@ -61,33 +60,6 @@
     height: 4px;
     background: #fff;
     border-radius: 2px;
-  }
-
-  #mobileMenu {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 250px;
-    background-color: #111;
-    padding-top: 80px;
-    flex-direction: column;
-    z-index: 15;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-  }
-
-  #mobileMenu.show {
-    transform: translateX(0);
-  }
-
-  #mobileMenu a {
-    color: #fff;
-    text-decoration: none;
-    padding: 15px 25px;
-    font-size: 18px;
-    font-family: inherit;
   }
 
   /* SYSTEM STATUS BAR STYLES */
@@ -153,7 +125,6 @@
     overflow: hidden;
   }
 
-  /* FULLSCREEN BACKGROUND VIDEO */
   .bg-video {
     position: absolute;
     top: 0;
@@ -165,18 +136,38 @@
     z-index: 1;
   }
 
-  #contentContainer video:not(.bg-video) {
-    position: absolute;
-    object-fit: cover;
-    z-index: 2;
+  #afterPopupText {
+    position: relative;
+    opacity: 0;
+    margin: 50px auto;
+    max-width: 900px;
+    padding: 20px;
   }
 
-  h1 {
-    font-size: 45px;
-    font-weight: normal;
-    letter-spacing: 5px;
-    margin-left: -120px;
-    margin-bottom: 20px;
+  /* ABOUT TAG STYLE */
+  .section-tag {
+    color: #daff2c;
+   font-size: 30px;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+    display: block;
+    opacity: 0.8;
+    
+    /* ADD THESE THREE LINES */
+    position: relative;
+    top: -30px;   /* Move it up (negative value) */
+    left: -200px;  /* Move it left (negative value) */
+  }
+
+  #neuralCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    transform: translateX(-25%);
   }
 
   .top-images {
@@ -185,6 +176,8 @@
     gap: 15px;
     width: 100%;
     margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
   }
 
   .top-images img {
@@ -198,6 +191,8 @@
     grid-template-columns: 1fr 150px;
     gap: 40px;
     line-height: 1.6;
+    position: relative;
+    z-index: 2;
   }
 
   .media-side {
@@ -205,54 +200,8 @@
     flex-direction: column;
     gap: 30px;
     padding-top: 100px;
-    position: relative;
-    z-index: 2;
   }
 
-  #afterPopupText {
-    position: relative;
-    opacity: 0;
-    margin: 50px auto;
-    max-width: 900px;
-    padding: 20px;
-  }
-
-  /* ABOUT SECTION FONT OVERRIDE */
-  .about-wrapper,
-  .about-wrapper h1,
-  .about-wrapper p {
-    font-family: 'Courier New', monospace;
-  }
-
-  .about-wrapper {
-    position: relative;
-    top: -40px;
-    left: -30px;
-    color: #daff2c;
-  }
-
-  .about-bg {
-    position: absolute;
-    top: 0px;
-    left: -295px;
-    width: 1800px;
-    mix-blend-mode: screen;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .content-grid > div:first-child {
-    margin-top: 40px; 
-    margin-left: -50px;
-  }
-
-  @media (min-width: 769px) {
-    .content-grid > div:first-child { transform: translateX(50px); }
-    .media-side { transform: translateX(50px); }
-    .top-images { transform: translateX(50px); }
-  }
-
-  /* SOCIAL LINKS SECTION */
   .social-footer {
       display: flex;
       flex-wrap: wrap;
@@ -269,22 +218,11 @@
       text-decoration: none;
       font-size: 14px;
       letter-spacing: 2px;
-      position: relative;
-      transition: none;
       text-transform: uppercase;
   }
 
   .social-icon:before { content: "[ "; opacity: 0.5; }
   .social-icon:after { content: " ]"; opacity: 0.5; }
-
-  @media (max-width: 768px) {
-      .social-footer {
-          flex-direction: row;
-          flex-wrap: wrap;
-          gap: 15px;
-      }
-  }
-
 </style>
 </head>
 
@@ -296,7 +234,6 @@
   <a href="writing.html">writings</a>
   <a href="about.html">about</a>
 </nav>
-<div id="hamburger"><span></span><span></span><span></span></div>
 
 <div id="contentContainer">
   <video src="public\video\home sound blabl ndnoasocms.mp4" class="bg-video" autoplay loop muted playsinline></video>
@@ -311,42 +248,43 @@
 </div>
 
 <div id="afterPopupText" style="display:none;">
+  <span class="section-tag">&lt; who is this? &gt;</span>
+
   <div class="about-wrapper">
-    <img src="public\images\ABOUT(1).jpg" class="about-bg" alt="">
-    <!-- About title removed -->
-  </div>
-
-  <div class="top-images">
-    <img src="public/images/window.about.jpg">
-    <img src="public/images/window.about.jpg">
-    <img src="public/images/window.about.jpg">
-  </div>
-
-  <div class="content-grid">
-    <div>
-      <p>So.x509 is a collection of poems; experimental, dark, and ethereal melodies.</p>
-      <p>So.x509 is a producer, writer, and composer — a painter of worlds that exist between reality and virtual dreams.</p>
-      <p>So.x509 is cockroaches and the colour blue.</p>
-      <p>
-        So.x509 is a computer.<br>
-        Is a human.<br>
-        Is the brain.<br>
-        Is the software engineer of digital emotions.
-      </p>
-      <p>In a world that feels more computational on the outside than on the inside, she's trying.</p>
+    <canvas id="neuralCanvas"></canvas>
+    
+    <div class="top-images">
+      <img src="public/images/window.about.jpg">
+      <img src="public/images/window.about.jpg">
+      <img src="public/images/window.about.jpg">
     </div>
 
-    <div class="media-side">
-      <img src="public/images/2.jpg">
-      <img src="public/images/3.jpg">
-      <img src="public/images/4.jpg">
-    </div>
-  </div>
+    <div class="content-grid">
+      <div>
+        <p>So.x509 is a collection of poems; experimental, dark, and ethereal melodies.</p>
+        <p>So.x509 is a producer, writer, and composer — a painter of worlds that exist between reality and virtual dreams.</p>
+        <p>So.x509 is cockroaches and the colour blue.</p>
+        <p>
+          So.x509 is a computer.<br>
+          Is a human.<br>
+          Is the brain.<br>
+          Is the software engineer of digital emotions.
+        </p>
+        <p>In a world that feels more computational on the outside than on the inside, she's trying.</p>
+      </div>
 
-  <div class="social-footer">
-      <a href="https://www.instagram.com/so.x509/" target="_blank" class="social-icon">Social</a>
-      <a href="https://open.spotify.com/artist/0Jevy8EUZIQwpzU7jkxvVu" target="_blank" class="social-icon">Spotify</a>
-      <a href="mailto:so.x509@post.com" class="social-icon">Email</a>
+      <div class="media-side">
+        <img src="public/images/2.jpg">
+        <img src="public/images/3.jpg">
+        <img src="public/images/4.jpg">
+      </div>
+    </div>
+
+    <div class="social-footer">
+        <a href="https://www.instagram.com/so.x509/" target="_blank" class="social-icon">Social</a>
+        <a href="https://open.spotify.com/artist/0Jevy8EUZIQwpzU7jkxvVu" target="_blank" class="social-icon">Spotify</a>
+        <a href="mailto:so.x509@post.com" class="social-icon">Email</a>
+    </div>
   </div>
 </div>
 
@@ -357,10 +295,11 @@
 </div>
 
 <script>
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-
-hamburger.onclick = () => mobileMenu.classList.toggle('show');
+const popupOverlay = document.getElementById('popupOverlay');
+const popupMainText = document.getElementById('popupMainText');
+const closePopup = document.getElementById('closePopup');
+const contentContainer = document.getElementById('contentContainer');
+const afterPopupText = document.getElementById('afterPopupText');
 
 window.onload = () => {
   setTimeout(() => {
@@ -372,7 +311,11 @@ window.onload = () => {
     popupOverlay.style.display = "none";
     contentContainer.style.display = "none";
     afterPopupText.style.display = "block";
-    setTimeout(() => afterPopupText.style.opacity = 1, 50);
+    setTimeout(() => {
+        afterPopupText.style.opacity = 1;
+        initCanvas(); 
+        draw();
+    }, 50);
   };
 };
 
@@ -392,8 +335,66 @@ setInterval(updateStream, 2500);
 updateClock();
 updateStream();
 
+// ===== NEURAL NETWORK CANVAS LOGIC =====
+const canvas = document.getElementById('neuralCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+const particleCount = 50; 
+const connectionDistance = 160;
+
+function initCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  particles = [];
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      radius: Math.random() * 1.5
+    });
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#daff2c'; 
+  ctx.strokeStyle = 'rgba(218, 255, 44, 0.15)'; 
+  ctx.lineWidth = 0.6;
+
+  for (let i = 0; i < particles.length; i++) {
+    let p = particles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    for (let j = i + 1; j < particles.length; j++) {
+      let p2 = particles[j];
+      let dx = p.x - p2.x;
+      let dy = p.y - p2.y;
+      let dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < connectionDistance) {
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(draw);
+}
+window.addEventListener('resize', initCanvas);
+
 // ===== ZALGO GLITCH =====
-const zalgo_up = ["̍","̎","̄","̅","̿","̑","̆","̐","͒","͗","͑","̇","̈","̊","͂","̓","̈́","͊","͋","͌","̃","̂","̌","͐","̀","́","̋","̏","̒","̓","̔","̽","̉","ͣ","ͤ","ͥ","ͦ","ͧ","ͨ","ͩ","ͪ","ͫ","ͬ","ͭ","ͮ","ͯ"];
+const zalgo_up = ["̍","̎","̄","̅","̿","̑","̆","̐","͒","͗","͑","̇","̈","̊","͂","̓","̈́","͊","͋","͌","̃","̂","̌","͐","̀","́","̋","̏","̒","̓","̔","̽","̉","ͣ","ͤ","ͥ","ͦ","ͧ","ͨ","ͩ","ͪ","ͫ","ͬ","ͭ","ͮ","ͯ"];
 const zalgo_down = ["̖","̗","̘","̙","̜","̝","̞","̟","̠","̤","̥","̦","̩","̪","̫","̬","̭","̮","̯","̰","̱","̲","̳","̹","̺","̻","̼","ͅ","͇","͈","͉","͍","͎","͓","͔","͕","͖","͙","͚","̣"];
 const zalgo_mid = ["̕","̛","̀","́","͘","̡","̢","̧","̨","̴","̵","̶","͜","͝","͞","͟","͠","͢","̸","̷","͡"," ҉"];
 
@@ -410,29 +411,21 @@ function zalgo(text, intensity = 3) {
   }).join('');
 }
 
-// Social icons
 const socialIcons = document.querySelectorAll('.social-icon');
 socialIcons.forEach(icon => {
   const originalText = icon.textContent;
   icon.addEventListener('mouseenter', () => icon.textContent = zalgo(originalText, 5));
   icon.addEventListener('mouseleave', () => icon.textContent = originalText);
-  icon.addEventListener('touchstart', () => icon.textContent = zalgo(originalText, 5));
-  icon.addEventListener('touchend', () => icon.textContent = originalText);
 });
 
-// Menu links
 const menuLinks = document.querySelectorAll('nav a');
 menuLinks.forEach(link => {
   const originalText = link.textContent;
   link.addEventListener('mouseenter', () => link.textContent = zalgo(originalText, 4));
   link.addEventListener('mouseleave', () => link.textContent = originalText);
-  link.addEventListener('touchstart', () => link.textContent = zalgo(originalText, 4));
-  link.addEventListener('touchend', () => link.textContent = originalText);
 });
 </script>
 
 </body>
 </html>
-
-
 
